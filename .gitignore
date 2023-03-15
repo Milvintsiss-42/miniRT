@@ -1,0 +1,9 @@
+.vscode
+.DS_Store
+build
+miniRT
+infile*
+outfile*
+*.o
+*.supp
+.nfs*

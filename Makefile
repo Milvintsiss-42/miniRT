@@ -28,7 +28,7 @@ MLX			= $(MLX_DIR)/libmlx_Linux.a
 MLX_FLAGS	= -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
 
 CC			= cc
-CFLAGS		= -Wall -Wextra
+CFLAGS		= -Wall -Wextra -O3
 LFLAGS		= $(LIBFT_FLAGS) $(MLX_FLAGS)
 ifneq (nWerror, $(filter nWerror,$(MAKECMDGOALS)))
 	CFLAGS	+= -Werror

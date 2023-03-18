@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   clear_mrt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 17:58:25 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/18 18:05:40 by ple-stra         ###   ########.fr       */
+/*   Created: 2023/03/18 17:54:13 by ple-stra          #+#    #+#             */
+/*   Updated: 2023/03/18 21:30:49 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-static void	init_mrt_data(t_mrt *mrt, int argc, char const **argv)
+static void	free_mlx(t_mlx mlx)
 {
-	if (argc < 1 || !argv[0])
-		exit(1);
-	mrt->bin_name = argv[0];
-	mrt->mlx.mlx = 0;
-	mrt->mlx.window = 0;
-	mrt->mlx.win_height = 0;
-	mrt->mlx.win_width = 0;
-	mrt->img.current = null_img();
-	mrt->img.future = null_img();
+	if (!mlx.mlx)
+		return ;
+	if (mlx.window)
+		mlx_destroy_window(mlx.mlx, mlx.window);
+	mlx_destroy_display(mlx.mlx);
+	free(mlx.mlx);
 }
 
-int	main(int argc, char const **argv)
+static void	free_mrt(t_mrt mrt)
 {
-	t_mrt	mrt;
+	destroy_img(mrt.mlx, mrt.img.current);
+	destroy_img(mrt.mlx, mrt.img.future);
+	free_mlx(mrt.mlx);
+}
 
-	init_mrt_data(&mrt, argc, argv);
-	return (0);
+void	exit_mrt(t_mrt mrt, int status)
+{
+	free_mrt(mrt);
+	exit(status);
 }

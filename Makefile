@@ -13,7 +13,17 @@
 NAME		= miniRT
 
 SRCS_DIR	= srcs
-SRCS		= main.c
+SRCS		= $(addsuffix .c, \
+	main \
+	$(addprefix common/, \
+		clear_mrt \
+		errors \
+	) \
+	$(addprefix img_helpers/, \
+		img_garbage \
+		img_helpers \
+	) \
+ )
 BUILD_DIR	= build
 OBJ_DIR		= $(BUILD_DIR)/objs
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))

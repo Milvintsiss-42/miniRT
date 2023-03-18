@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/15 19:23:53 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:39:21 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef COMMON_H
+# define COMMON_H
 
 # include "libft.h"
 # include "mlx.h"
-# include <fcntl.h>
-# include <stdio.h>
-# include <math.h>
+# include "img_helpers.h"
 
 # define PROGRAM_NAME "miniRT"
+
+# define ERR_UNKNOWN			"Unknown error"
 
 # define ERR_WRG_NB_ARG			"Error: Incorrect number of arguments"
 # define ERR_INV_EXT			"Error: Invalid file extension"
@@ -31,19 +31,6 @@
 
 # define KEY_ECHAP		0xff1b
 
-typedef struct s_img {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_len;
-	int		endian;
-}	t_img;
-
-typedef struct s_img_garbage {
-	t_img	current;
-	t_img	future;
-}	t_img_garbage;
-
 typedef struct s_mlx {
 	void	*mlx;
 	void	*window;
@@ -52,8 +39,16 @@ typedef struct s_mlx {
 }	t_mlx;
 
 typedef struct s_mrt {
+	const char		*bin_name;
 	t_mlx			mlx;
 	t_img_garbage	img;
-}	t_fdf;
+}	t_mrt;
+
+void		exit_mrt(t_mrt mrt, int status);
+
+int			ft_perror(t_mrt mrt, const char *error_str);
+int			ft_fperror(t_mrt mrt, const char *filename, const char *error_str);
+int			ft_perror_errno(t_mrt mrt);
+int			ft_fperror_errno(t_mrt mrt, const char *filename);
 
 #endif

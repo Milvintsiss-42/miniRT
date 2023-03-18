@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/03/15 18:37:08 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/03/18 21:34:33 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS		= main.c
 BUILD_DIR	= build
 OBJ_DIR		= $(BUILD_DIR)/objs
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-INC			= -I./includes -I./$(LIBFT_DIR)/includes -I./
+INC			= -I./includes -I./$(LIBFT_DIR)/includes -I./$(MLX_DIR) -I./
 
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/build/libft.a

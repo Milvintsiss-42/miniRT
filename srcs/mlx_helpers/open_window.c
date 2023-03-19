@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:25:57 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 15:09:11 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:21:45 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	setup_mlx_window(t_mrt *mrt, double width_fraction,
 
 	mlx = &mrt->mlx;
 	mlx_get_screen_size(mlx->mlx, &mlx->win_width, &mlx->win_height);
+	if (KDEBUG)
+		ft_printf("Screen size: %d x %d", mlx->win_width, mlx->win_height);
 	mlx->win_width *= width_fraction;
 	mlx->win_height *= height_fraction;
 	mlx->window = mlx_new_window(mlx->mlx, mlx->win_width, mlx->win_height,

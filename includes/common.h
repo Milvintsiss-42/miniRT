@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 14:41:34 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:20:38 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include "img_helpers.h"
 
 # define PROGRAM_NAME "miniRT"
+
+# ifndef KDEBUG
+#  define KDEBUG 0
+# endif
 
 # define ERR_UNKNOWN			"Unknown error"
 

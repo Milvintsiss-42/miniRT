@@ -6,12 +6,12 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:25:57 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 15:21:45 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:34:46 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "common.h"
 #include "engine.h"
+#include "mlx_helpers.h"
 
 void	reframe(t_mrt *mrt)
 {
@@ -49,5 +49,7 @@ void	open_window(t_mrt *mrt, double width_fraction, double height_fraction)
 	init_mlx_lib(mrt);
 	setup_mlx_window(mrt, width_fraction, height_fraction);
 	reframe(mrt);
+	mlx_key_hook(mrt->mlx.window, on_keypressed, mrt);
+	mlx_hook(mrt->mlx.window, 17, 0, on_cross_clicked, mrt);
 	mlx_loop(mrt->mlx.mlx);
 }

@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/03/19 15:04:11 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/03/19 15:35:24 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS		= $(addsuffix .c, \
 	$(addprefix mlx_helpers/, \
 		basic_mlx_helpers \
 		open_window \
+		events \
 	) \
  )
 BUILD_DIR	= build

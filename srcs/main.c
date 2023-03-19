@@ -6,11 +6,12 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:58:25 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/18 18:05:40 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:57:47 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
+#include "mlx_helpers.h"
 
 static void	init_mrt_data(t_mrt *mrt, int argc, char const **argv)
 {
@@ -30,5 +31,6 @@ int	main(int argc, char const **argv)
 	t_mrt	mrt;
 
 	init_mrt_data(&mrt, argc, argv);
+	open_window(&mrt, 0.5, 0.5);
 	return (0);
 }

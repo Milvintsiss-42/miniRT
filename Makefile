@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/03/18 21:34:33 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/03/19 15:04:11 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,16 @@ SRCS		= $(addsuffix .c, \
 		clear_mrt \
 		errors \
 	) \
+	$(addprefix engine/, \
+		draw_frame \
+	) \
 	$(addprefix img_helpers/, \
 		img_garbage \
 		img_helpers \
+	) \
+	$(addprefix mlx_helpers/, \
+		basic_mlx_helpers \
+		open_window \
 	) \
  )
 BUILD_DIR	= build

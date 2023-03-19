@@ -6,15 +6,17 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 15:20:38 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:15:14 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMON_H
 # define COMMON_H
 
+# include <stdbool.h>
 # include "libft.h"
 # include "mlx.h"
+# include "engine.h"
 # include "img_helpers.h"
 
 # define PROGRAM_NAME "miniRT"
@@ -46,6 +48,7 @@ typedef struct s_mrt {
 	const char		*bin_name;
 	t_mlx			mlx;
 	t_img_garbage	img;
+	t_scene			scene;
 }	t_mrt;
 
 void		exit_mrt(t_mrt mrt, int status);

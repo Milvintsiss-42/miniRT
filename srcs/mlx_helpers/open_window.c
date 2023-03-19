@@ -6,11 +6,11 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:25:57 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 15:34:46 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:34:44 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "common.h"
 #include "mlx_helpers.h"
 
 void	reframe(t_mrt *mrt)

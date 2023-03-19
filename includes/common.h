@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/18 21:39:21 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:30:29 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_mrt {
 void		exit_mrt(t_mrt mrt, int status);
 
 int			ft_perror(t_mrt mrt, const char *error_str);
-int			ft_fperror(t_mrt mrt, const char *filename, const char *error_str);
+int			ft_ctxtperror(t_mrt mrt, const char *filename, const char *error_str);
 int			ft_perror_errno(t_mrt mrt);
-int			ft_fperror_errno(t_mrt mrt, const char *filename);
+int			ft_ctxtperror_errno(t_mrt mrt, const char *filename);
 
 #endif

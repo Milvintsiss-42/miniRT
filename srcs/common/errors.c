@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:56:35 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/18 21:38:49 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:32:17 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,23 @@
 #include <string.h>
 
 // prints error for the program
+// ex: bin_name: error_str
 int	ft_perror(t_mrt mrt, const char *error_str)
 {
 	ft_printf_fd(2, "%s: %s\n", mrt.bin_name, error_str);
 	return (1);
 }
 
-// prints error for the file
-int	ft_fperror(t_mrt mrt, const char *filename, const char *error_str)
+// prints error for the context
+// ex: bin_name: context: error_str
+int	ft_ctxtperror(t_mrt mrt, const char *context, const char *error_str)
 {
-	ft_printf_fd(2, "%s: %s: %s\n", mrt.bin_name, filename, error_str);
+	ft_printf_fd(2, "%s: %s: %s\n", mrt.bin_name, context, error_str);
 	return (1);
 }
 
-// prints error for the program
+// prints error for the program using errno
+// ex: bin_name: error_str
 int	ft_perror_errno(t_mrt mrt)
 {
 	if (errno == 0)
@@ -38,12 +41,13 @@ int	ft_perror_errno(t_mrt mrt)
 	return (errno);
 }
 
-// prints error for the file
-int	ft_fperror_errno(t_mrt mrt, const char *filename)
+// prints error for the context using errno
+// ex: bin_name: context: error_str
+int	ft_ctxtperror_errno(t_mrt mrt, const char *context)
 {
 	if (errno == 0)
-		return (ft_fperror(mrt, filename, ERR_UNKNOWN));
+		return (ft_ctxtperror(mrt, context, ERR_UNKNOWN));
 	ft_printf_fd(2, "%s: %s: %s\n",
-		mrt.bin_name, filename, strerror(errno));
+		mrt.bin_name, context, strerror(errno));
 	return (errno);
 }

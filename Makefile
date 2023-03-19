@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/03/19 19:18:49 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/03/19 20:45:01 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS_DIR	= srcs
 SRCS		= $(addsuffix .c, \
 	main \
 	$(addprefix common/, \
+		basic_utils \
 		clear_mrt \
 		errors \
 	) \

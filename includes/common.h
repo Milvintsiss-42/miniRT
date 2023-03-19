@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 19:15:14 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/19 20:44:22 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ int			ft_ctxtperror(t_mrt mrt, const char *filename,
 				const char *error_str);
 int			ft_perror_errno(t_mrt mrt);
 int			ft_ctxtperror_errno(t_mrt mrt, const char *filename);
+
+const char	*ft_basename(const char *path);
 
 #endif

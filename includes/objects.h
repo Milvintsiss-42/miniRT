@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 19:32:17 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:08:30 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 typedef struct s_vec3
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_vec3;
 
 typedef enum e_obj_type
@@ -39,7 +39,7 @@ typedef struct s_l_object
 
 typedef struct s_amb_light
 {
-	float	brightness;
+	double	brightness;
 	int		color;
 }	t_amb_light;
 
@@ -53,14 +53,14 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_vec3	origin;
-	float	brightness;
+	double	brightness;
 	int		color;
 }	t_light;
 
 typedef struct s_sphere
 {
 	t_vec3	origin;
-	float	radius;
+	double	radius;
 	int		color;
 }	t_sphere;
 
@@ -75,8 +75,8 @@ typedef struct s_cylinder
 {
 	t_vec3	origin;
 	t_vec3	orientation;
-	float	radius;
-	float	height;
+	double	radius;
+	double	height;
 	int		color;
 }	t_cylinder;
 

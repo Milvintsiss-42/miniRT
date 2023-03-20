@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/25 21:12:38 by ple-stra          #+#    #+#              #
-#    Updated: 2023/03/20 14:20:07 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/03/20 15:23:13 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,8 @@ SRCS		= \
  ft_strcmp.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
  ft_calloc.c ft_free.c ft_strdup.c ft_realloc.c \
 \
- ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_itoa_base.c \
- ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
+ ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_splitlen.c ft_itoa.c \
+ ft_itoa_base.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
  ft_putendl_fd.c ft_putnbr_fd.c ft_putchar.c ft_putstr.c \
 \
  ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \

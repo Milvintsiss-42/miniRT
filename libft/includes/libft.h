@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:24:29 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/20 14:19:17 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:23:32 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
 void		ft_freesplit(char **split);
+size_t		ft_splitlen(char **split);
 char		*ft_itoa(int n);
 char		*ft_itoa_u(unsigned int n);
 char		*ft_itoa_stupid(int n);

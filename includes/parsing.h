@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:29:32 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 20:11:27 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/23 20:18:59 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		set_camera(t_mrt *mrt, t_parsing *parsing);
 void		add_light(t_mrt *mrt, t_parsing *parsing);
 void		add_sphere(t_mrt *mrt, t_parsing *parsing);
 void		add_plane(t_mrt *mrt, t_parsing *parsing);
+void		add_cylinder(t_mrt *mrt, t_parsing *parsing);
 
 bool		parse_color(char *str, int *color_ret);
 bool		is_int(char *str);

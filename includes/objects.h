@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 20:05:40 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/23 20:18:08 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_cylinder
 {
 	t_vec3	origin;
 	t_vec3	orientation;
-	double	radius;
+	double	diameter;
 	double	height;
 	int		color;
 }	t_cylinder;

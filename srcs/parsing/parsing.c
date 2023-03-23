@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:35:13 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 20:09:14 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/23 20:15:16 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static bool	get_info_from_line(t_mrt *mrt, t_parsing *parsing)
 		add_sphere(mrt, parsing);
 	else if (ft_strcmp(parsing->s_line[0], "pl") == 0)
 		add_plane(mrt, parsing);
-	// else if (ft_strcmp(parsing->s_line[0], "cy") == 0)
-	// 	add_cylinder(mrt, parsing);
+	else if (ft_strcmp(parsing->s_line[0], "cy") == 0)
+		add_cylinder(mrt, parsing);
 	else
 		return (false);
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:24:29 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/20 15:23:32 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:30:10 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 int			ft_atoi(const char *nptr);
+double		ft_atof(const char *nptr);
 int			ft_baseatoi(char const *nptr, char const *base);
 void		*ft_calloc(size_t nmenb, size_t size);
 int			ft_free(void *to_free);

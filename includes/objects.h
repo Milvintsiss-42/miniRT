@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/20 18:08:30 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/03/23 20:05:40 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_vec3	origin;
-	double	radius;
+	double	diameter;
 	int		color;
 }	t_sphere;
 

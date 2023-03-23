@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/03/23 20:07:09 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/03/23 20:11:36 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS		= $(addsuffix .c, \
 		parse_light \
 		parse_camera \
 		parse_sphere \
+		parse_plane \
 	) \
 	$(addprefix img_helpers/, \
 		img_garbage \

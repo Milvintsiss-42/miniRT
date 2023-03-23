@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/03/19 20:45:01 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/03/23 17:38:20 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,14 @@ SRCS		= $(addsuffix .c, \
 	) \
 	$(addprefix engine/, \
 		draw_frame \
+	) \
+	$(addprefix parsing/, \
+		parsing \
+		parsing_helpers \
+		parsing_helpers_color \
+		parsing_helpers_vectors \
+		parse_light \
+		parse_camera \
 	) \
 	$(addprefix img_helpers/, \
 		img_garbage \

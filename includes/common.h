@@ -28,8 +28,6 @@
 # define ERR_UNKNOWN			"Unknown error"
 
 # define ERR_WRG_NB_ARG			"Incorrect number of arguments"
-# define ERR_INV_EXT			"Invalid file extension"
-# define ERR_INV_FILE			"Invalid file"
 
 # define ERR_FAILED_INIT_MLX	"MiniLibX: Failed to init mlx"
 # define ERR_FAILED_OP_WIN_MLX	"MiniLibX: Failed to open mlx window"

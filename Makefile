@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/04/08 19:42:39 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/04/12 17:43:55 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS		= $(addsuffix .c, \
 		basic_utils \
 		clear_mrt \
 		errors \
+		print_progress \
 	) \
 	$(addprefix engine/, \
 		draw_frame \

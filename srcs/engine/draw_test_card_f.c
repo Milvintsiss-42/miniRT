@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:24:43 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/04/08 20:00:14 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/04/12 17:53:04 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void	draw_test_card_f(t_mrt *mrt)
 			y++;
 		}
 		x++;
+		print_progress(x, mrt->mlx.win_width);
 	}
 }

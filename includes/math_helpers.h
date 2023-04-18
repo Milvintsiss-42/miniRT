@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_frame.c                                       :+:      :+:    :+:   */
+/*   math_helpers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/04/08 19:44:04 by ple-stra         ###   ########.fr       */
+/*   Created: 2023/04/08 17:43:48 by ple-stra          #+#    #+#             */
+/*   Updated: 2023/04/08 17:45:06 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "common.h"
+#ifndef MATH_HELPERS_H
+# define MATH_HELPERS_H
 
-void	draw_frame(t_mrt *mrt)
-{
-	draw_test_card_f(mrt);
-}
+# include <math.h>
+
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
+
+#endif

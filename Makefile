@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/04/18 04:44:01 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/04/18 04:48:27 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,11 @@ SRCS		= $(addsuffix .c, \
 		basic_utils \
 		clear_mrt \
 		errors \
+		print_progress \
 	) \
 	$(addprefix engine/, \
 		draw_frame \
+		draw_test_card_f \
 	) \
 	$(addprefix parsing/, \
 		parsing \
@@ -45,6 +47,9 @@ SRCS		= $(addsuffix .c, \
 	) \
 	$(addprefix object_helpers/, \
 		object_lists \
+	) \
+	$(addprefix math_helpers/, \
+		angle_helpers \
 	) \
  )
 BUILD_DIR	= build

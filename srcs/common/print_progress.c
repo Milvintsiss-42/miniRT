@@ -6,13 +6,13 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 17:38:54 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/04/12 17:52:42 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:49:18 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	print_progress(int progress, int total)
+void	print_progress(int progress, int start, int total)
 {
 	static int	last_print_len = 0;
 	char		*cariage_back;
@@ -27,7 +27,9 @@ void	print_progress(int progress, int total)
 		write(1, cariage_back, last_print_len);
 		free(cariage_back);
 	}
-	last_print_len = ft_printf("%.2d%%", (int)(progress * 100 / total));
+	last_print_len = ft_printf("%.2d%%",
+			(int)(((double)(progress - start)) / ((double)(total - start))
+				* 100));
 	if (progress != total)
 		return ;
 	write(1, "\n", 1);

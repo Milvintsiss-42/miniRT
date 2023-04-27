@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:52:26 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 14:52:59 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:30:41 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	put_pixel_on_img(t_mrt *mrt, int x, int y, int color)
 	char	*dest;
 
 	img = mrt->img.future;
+	x += mrt->mlx.win_width / 2;
+	y = mrt->mlx.win_height / 2 - y;
 	if (x >= 0 && x < mrt->mlx.win_width && y >= 0 && y < mrt->mlx.win_height)
 	{
 		dest = img.addr + (y * img.line_len + x * (img.bits_per_pixel / 8));

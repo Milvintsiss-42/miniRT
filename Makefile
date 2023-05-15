@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/04/27 22:56:01 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/05/15 22:54:54 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,10 +66,12 @@ LIBFT_FLAGS	= -L$(LIBFT_DIR)/build -lft
 MLX_DIR		= minilibx
 ifeq ($(shell uname), Linux)
 MLX			= $(MLX_DIR)/libmlx_Linux.a
-MLX_FLAGS	= -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
+MLX_FLAGS	= -L$(MLX_DIR) -lmlx_Linux \
+ -L/usr/lib -L/usr/X11/lib -lXext -lX11 -lm
 else
 MLX			= $(MLX_DIR)/libmlx_Darwin.a
-MLX_FLAGS	= -L$(MLX_DIR) -lmlx_Darwin -L/usr/lib -lXext -lX11 -lm
+MLX_FLAGS	= -L$(MLX_DIR) -lmlx_Darwin \
+ -L/usr/lib -L/usr/X11/lib -lXext -lX11 -lm
 endif
 
 CC			= cc

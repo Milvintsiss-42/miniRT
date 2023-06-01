@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/04/27 16:44:30 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/05/31 21:04:51 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define ERR_MLXCRASH			"MiniLibX: MLX crashed"
 
 # define KEY_ECHAP		0xff1b
+
+# define BACKGROUND_COLOR	0xffffff
 
 typedef struct s_mlx {
 	void	*mlx;

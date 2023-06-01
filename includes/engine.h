@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/04/08 19:42:21 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/02 00:40:10 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,21 @@
 # include "common.h"
 # include "objects.h"
 
+# define DOUBLE_MAX()	1.0 / 0.0
+
+# define VP_DIST	1
+# define T_MIN		1.0
+# define T_MAX		DOUBLE_MAX()
+
+typedef struct s_viewport
+{
+	double	w;
+	double	h;
+}	t_viewport;
+
 typedef struct s_scene
 {
+	t_viewport	viewport;
 	t_l_obj		*objects;
 	t_l_obj		*lights;
 	t_amb_light	amb_light;

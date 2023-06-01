@@ -6,13 +6,97 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/04/08 19:44:04 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/02 00:44:18 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
+#include "mlx_helpers.h"
+
+t_vec3	canvas_to_viewport(t_mrt *mrt, int x, int y)
+{
+	t_vec3	vp;
+
+	vp.x = x * mrt->scene.viewport.w / mrt->mlx.win_width;
+	vp.y = y * mrt->scene.viewport.h / mrt->mlx.win_height;
+	vp.z = VP_DIST;
+	return (vp);
+}
+
+t_quadratic	intersect_ray_sphere(t_vec3 origin, t_vec3 dir, t_sphere sphere)
+{
+	t_quadratic	s;
+	t_vec3		co;
+
+	co = vec3_diff(origin, sphere.origin);
+	s.a = vec3_dot_prdct(dir, dir);
+	s.b = 2 * vec3_dot_prdct(co, dir);
+	s.c = vec3_dot_prdct(co, co)
+		- (sphere.diameter / 2) * (sphere.diameter / 2);
+	s.discriminant = s.b * s.b - 4 * s.a * s.c;
+	s.t1 = 1.0 / 0.0;
+	s.t2 = 1.0 / 0.0;
+	if (s.discriminant >= 0)
+	{
+		s.t1 = (-s.b + sqrt(s.discriminant)) / (2 * s.a);
+		s.t2 = (-s.b - sqrt(s.discriminant)) / (2 * s.a);
+	}
+	return (s);
+}
+
+int	trace_ray(t_mrt *mrt, t_vec3 origin, t_vec3 dir)
+{
+	double		closest_t;
+	t_sphere	*closest_sphere;
+	t_l_obj		*obj_iter;
+	t_quadratic	t;
+
+	closest_t = 1.0 / 0.0;
+	closest_sphere = NULL;
+	obj_iter = mrt->scene.objects;
+	while (obj_iter)
+	{
+		if (obj_iter->type == SPHERE)
+		{
+			t = intersect_ray_sphere(
+					origin, dir, *(t_sphere *)(obj_iter->object));
+			if (t.t1 >= T_MIN && t.t1 <= T_MAX && t.t1 < closest_t)
+			{
+				closest_t = t.t1;
+				closest_sphere = obj_iter->object;
+			}
+			if (t.t2 >= T_MIN && t.t2 <= T_MAX && t.t2 < closest_t)
+			{
+				closest_t = t.t2;
+				closest_sphere = obj_iter->object;
+			}
+		}
+		obj_iter = obj_iter->next;
+	}
+	if (!closest_sphere)
+		return (BACKGROUND_COLOR);
+	return (closest_sphere->color);
+}
 
 void	draw_frame(t_mrt *mrt)
 {
-	draw_test_card_f(mrt);
+	int		x;
+	int		y;
+	t_vec3	dir;
+	int		color;
+
+	x = -mrt->mlx.win_width / 2;
+	while (x < mrt->mlx.win_width / 2)
+	{
+		y = -mrt->mlx.win_height / 2;
+		while (y < mrt->mlx.win_height / 2)
+		{
+			dir = canvas_to_viewport(mrt, x, y);
+			color = trace_ray(mrt, mrt->scene.camera.origin, dir);
+			put_pixel_on_img(mrt, x, y, color);
+			y++;
+		}
+		x++;
+		print_progress(x, -mrt->mlx.win_width / 2, mrt->mlx.win_width / 2);
+	}
 }

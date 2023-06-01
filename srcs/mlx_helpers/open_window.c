@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:25:57 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 19:34:44 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:41:37 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	open_window(t_mrt *mrt, double width_fraction, double height_fraction)
 {
 	init_mlx_lib(mrt);
 	setup_mlx_window(mrt, width_fraction, height_fraction);
+	mrt->scene.viewport.w = 1.0;
+	mrt->scene.viewport.h = 1.0;
 	reframe(mrt);
 	mlx_key_hook(mrt->mlx.window, on_keypressed, mrt);
 	mlx_hook(mrt->mlx.window, 17, 0, on_cross_clicked, mrt);

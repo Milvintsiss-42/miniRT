@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/02 00:44:18 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:59:59 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@ t_vec3	canvas_to_viewport(t_mrt *mrt, int x, int y)
 	return (vp);
 }
 
+/// @brief Computes the intersections between a ray and a sphere.
+/// @param origin The origin of the ray.
+/// @param dir The direction of the ray.
+/// @param sphere The sphere to intersect with.
+/// @return Returns the distance between the origin of the ray and the
+/// intersections.
+/// Returns a t_quadratic struct containing the solved equation, t1 and t2 are
+/// the distances of each intersection.
+/// If there is only one intersection, t1 and t2 are equal.
+/// If there is no intersection, t1 and t2 are set to 1.0 / 0.0.
 t_quadratic	intersect_ray_sphere(t_vec3 origin, t_vec3 dir, t_sphere sphere)
 {
 	t_quadratic	s;

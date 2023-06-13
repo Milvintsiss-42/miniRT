@@ -6,13 +6,18 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/12 23:59:59 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/13 03:53:54 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 #include "mlx_helpers.h"
 
+/// @brief Converts a pixel coordinate on the canvas to a viewport coordinate.
+/// @param mrt
+/// @param x
+/// @param y
+/// @return Returns a t_vec3 containing the viewport coordinates.
 t_vec3	canvas_to_viewport(t_mrt *mrt, int x, int y)
 {
 	t_vec3	vp;

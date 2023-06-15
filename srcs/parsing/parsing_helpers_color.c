@@ -6,18 +6,17 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:45:00 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 17:31:50 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:27:00 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-bool	parse_color(char *str, int *color_ret)
+// We use t_vec3 to store colors, so x corresponds to red, y to green
+// and z to blue.
+bool	parse_color(char *str, t_vec3 *color_ret)
 {
 	char	**s_str;
-	int		r;
-	int		g;
-	int		b;
 
 	s_str = ft_split(str, ',');
 	if (!s_str)
@@ -28,12 +27,13 @@ bool	parse_color(char *str, int *color_ret)
 		ft_freesplit(s_str);
 		return (false);
 	}
-	r = ft_atoi(s_str[0]);
-	g = ft_atoi(s_str[1]);
-	b = ft_atoi(s_str[2]);
-	*color_ret = (r << 16) + (g << 8) + b;
+	color_ret->x = ft_atoi(s_str[0]);
+	color_ret->y = ft_atoi(s_str[1]);
+	color_ret->z = ft_atoi(s_str[2]);
 	ft_freesplit(s_str);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	if (color_ret->x < 0 || color_ret->x > 255
+		|| color_ret->y < 0 || color_ret->y > 255
+		|| color_ret->z < 0 || color_ret->z > 255)
 		return (false);
 	return (true);
 }

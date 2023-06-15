@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 16:13:10 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:29:42 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		draw_frame(t_mrt *mrt);
 void		draw_test_card_f(t_mrt *mrt);
 
 double		compute_lighting(t_mrt mrt, t_vec3 point, t_vec3 normal);
-int			apply_brightness_to_color(int color, double brightness);
+
+int			t_vec3_color_to_int(t_vec3 color);
 
 #endif

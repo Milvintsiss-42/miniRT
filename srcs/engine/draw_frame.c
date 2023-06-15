@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 16:19:07 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:31:00 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ int	compute_sphere_point_color(t_mrt mrt, t_vec3 origin, t_vec3 dir,
 {
 	t_vec3	point;
 	t_vec3	normal;
+	t_vec3	color;
 
 	point = vec3_sum(origin, vec3_scal_prdct(dir, closest_t));
 	normal = vec3_normalize(vec3_diff(point, sphere.origin));
-	return (apply_brightness_to_color(
-			sphere.color, compute_lighting(mrt, point, normal)));
+	color = vec3_scal_prdct(sphere.color, compute_lighting(mrt, point, normal));
+	return (t_vec3_color_to_int(color));
 }
 
 int	trace_ray(t_mrt *mrt, t_vec3 origin, t_vec3 dir)

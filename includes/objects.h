@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 15:28:59 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:21:58 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_l_object
 typedef struct s_amb_light
 {
 	double	brightness;
-	int		color;
+	t_vec3	color;
 }	t_amb_light;
 
 typedef struct s_camera
@@ -49,21 +49,21 @@ typedef struct s_light
 {
 	t_vec3	origin_o_dir;
 	double	brightness;
-	int		color;
+	t_vec3	color;
 }	t_light;
 
 typedef struct s_sphere
 {
 	t_vec3	origin;
 	double	diameter;
-	int		color;
+	t_vec3	color;
 }	t_sphere;
 
 typedef struct s_plane
 {
 	t_vec3	origin;
 	t_vec3	orientation;
-	int		color;
+	t_vec3	color;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -72,7 +72,7 @@ typedef struct s_cylinder
 	t_vec3	orientation;
 	double	diameter;
 	double	height;
-	int		color;
+	t_vec3	color;
 }	t_cylinder;
 
 bool		l_obj_add_back(t_l_obj **l_obj, void *object, t_obj_type type);

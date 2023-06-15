@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:29:32 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 15:28:34 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:24:46 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		add_sphere(t_mrt *mrt, t_parsing *parsing);
 void		add_plane(t_mrt *mrt, t_parsing *parsing);
 void		add_cylinder(t_mrt *mrt, t_parsing *parsing);
 
-bool		parse_color(char *str, int *color_ret);
+bool		parse_color(char *str, t_vec3 *color_ret);
 bool		is_int(char *str);
 bool		parse_int(char *str, int *int_ret);
 bool		is_double(char *str);

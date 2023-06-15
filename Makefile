@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/06/15 15:44:22 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/06/15 16:31:39 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS		= $(addsuffix .c, \
 		draw_frame \
 		draw_test_card_f \
 		lighting \
+		color_helpers \
 	) \
 	$(addprefix parsing/, \
 		parsing \

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:51:48 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 14:23:39 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:28:34 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,33 @@ void	set_ambiant_light(t_mrt *mrt, t_parsing *parsing)
 }
 
 static void	add_light_to_scene_lights(t_mrt *mrt, t_parsing *parsing,
-	t_light light)
+	t_light light, bool is_directional)
 {
-	t_light	*light_ptr;
+	t_light		*light_ptr;
+	t_obj_type	type;
 
+	if (is_directional)
+		type = DIR_LIGHT;
+	else
+		type = SPOT_LIGHT;
 	light_ptr = malloc(sizeof(t_light));
 	if (!light_ptr)
 		parsing_error(mrt, *parsing, ERR_UNEXPECTED_ERROR, false);
 	*light_ptr = light;
-	if (!l_obj_add_back(&mrt->scene.lights, light_ptr, LIGHT))
+	if (!l_obj_add_back(&mrt->scene.lights, light_ptr, type))
 	{
 		free(light_ptr);
 		parsing_error(mrt, *parsing, ERR_UNEXPECTED_ERROR, false);
 	}
 }
 
-void	add_light(t_mrt *mrt, t_parsing *parsing, bool is_directionnal)
+void	add_light(t_mrt *mrt, t_parsing *parsing, bool is_directional)
 {
 	t_light	light;
 
 	if (ft_splitlen(parsing->s_line) != 4)
 		parsing_error(mrt, *parsing, ERR_INVALID_NUMBER_OF_ARGUMENTS, true);
-	light.is_directional = is_directionnal;
-	if (is_directionnal)
+	if (is_directional)
 	{
 		if (!parse_normalized_vector(parsing->s_line[1], &light.origin_o_dir))
 			parsing_error(mrt, *parsing, ERR_INVALID_VECTOR, true);
@@ -68,5 +72,5 @@ void	add_light(t_mrt *mrt, t_parsing *parsing, bool is_directionnal)
 		parsing_error(mrt, *parsing, ERR_OUT_OF_RANGE, true);
 	if (!parse_color(parsing->s_line[3], &light.color))
 		parsing_error(mrt, *parsing, ERR_INVALID_COLOR, true);
-	add_light_to_scene_lights(mrt, parsing, light);
+	add_light_to_scene_lights(mrt, parsing, light, is_directional);
 }

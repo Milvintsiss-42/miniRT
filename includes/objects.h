@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 14:08:37 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:28:59 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 typedef enum e_obj_type
 {
-	LIGHT,
+	SPOT_LIGHT,
+	DIR_LIGHT,
 	SPHERE,
 	PLANE,
 	CYLINDER,
@@ -47,7 +48,6 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_vec3	origin_o_dir;
-	bool	is_directional;
 	double	brightness;
 	int		color;
 }	t_light;

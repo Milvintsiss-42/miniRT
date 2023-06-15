@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/04/27 17:25:09 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:08:37 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_vec3	origin;
+	t_vec3	origin_o_dir;
+	bool	is_directional;
 	double	brightness;
 	int		color;
 }	t_light;

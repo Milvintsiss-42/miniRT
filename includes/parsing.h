@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:29:32 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 20:18:59 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:06:48 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		parse_scene(t_mrt *mrt, const char *file_path);
 
 void		set_ambiant_light(t_mrt *mrt, t_parsing *parsing);
 void		set_camera(t_mrt *mrt, t_parsing *parsing);
-void		add_light(t_mrt *mrt, t_parsing *parsing);
+void		add_light(t_mrt *mrt, t_parsing *parsing, bool is_directionnal);
 void		add_sphere(t_mrt *mrt, t_parsing *parsing);
 void		add_plane(t_mrt *mrt, t_parsing *parsing);
 void		add_cylinder(t_mrt *mrt, t_parsing *parsing);

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:51:48 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 20:00:52 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:23:39 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,23 @@ static void	add_light_to_scene_lights(t_mrt *mrt, t_parsing *parsing,
 	}
 }
 
-void	add_light(t_mrt *mrt, t_parsing *parsing)
+void	add_light(t_mrt *mrt, t_parsing *parsing, bool is_directionnal)
 {
 	t_light	light;
 
 	if (ft_splitlen(parsing->s_line) != 4)
 		parsing_error(mrt, *parsing, ERR_INVALID_NUMBER_OF_ARGUMENTS, true);
-	if (!parse_vector(parsing->s_line[1], &light.origin))
-		parsing_error(mrt, *parsing, ERR_INVALID_VECTOR, true);
+	light.is_directional = is_directionnal;
+	if (is_directionnal)
+	{
+		if (!parse_normalized_vector(parsing->s_line[1], &light.origin_o_dir))
+			parsing_error(mrt, *parsing, ERR_INVALID_VECTOR, true);
+	}
+	else
+	{
+		if (!parse_vector(parsing->s_line[1], &light.origin_o_dir))
+			parsing_error(mrt, *parsing, ERR_INVALID_VECTOR, true);
+	}
 	if (!parse_double(parsing->s_line[2], &light.brightness))
 		parsing_error(mrt, *parsing, ERR_INVALID_FLOATING_POINT, true);
 	if (light.brightness < 0 || light.brightness > 1)

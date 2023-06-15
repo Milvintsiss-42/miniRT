@@ -6,11 +6,23 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:20:54 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 15:50:06 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:13:03 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
+
+int	apply_brightness_to_color(int color, double brightness)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = (int)((color >> 16) * brightness);
+	g = (int)(((color >> 8) & 0xff) * brightness);
+	b = (int)((color & 0xff) * brightness);
+	return ((r << 16) + (g << 8) + b);
+}
 
 /// @brief Computes the brightness of a point, based on the ambient light and
 /// the lights in the scene.

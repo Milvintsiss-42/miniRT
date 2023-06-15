@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/13 03:53:54 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:19:07 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ t_quadratic	intersect_ray_sphere(t_vec3 origin, t_vec3 dir, t_sphere sphere)
 	return (s);
 }
 
+int	compute_sphere_point_color(t_mrt mrt, t_vec3 origin, t_vec3 dir,
+	t_sphere sphere, double closest_t)
+{
+	t_vec3	point;
+	t_vec3	normal;
+
+	point = vec3_sum(origin, vec3_scal_prdct(dir, closest_t));
+	normal = vec3_normalize(vec3_diff(point, sphere.origin));
+	return (apply_brightness_to_color(
+			sphere.color, compute_lighting(mrt, point, normal)));
+}
+
 int	trace_ray(t_mrt *mrt, t_vec3 origin, t_vec3 dir)
 {
 	double		closest_t;
@@ -90,7 +102,8 @@ int	trace_ray(t_mrt *mrt, t_vec3 origin, t_vec3 dir)
 	}
 	if (!closest_sphere)
 		return (BACKGROUND_COLOR);
-	return (closest_sphere->color);
+	return (compute_sphere_point_color(*mrt, origin, dir, *closest_sphere,
+			closest_t));
 }
 
 void	draw_frame(t_mrt *mrt)

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:20:54 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 16:27:08 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:51:52 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ double	compute_lighting(t_mrt mrt, t_vec3 point, t_vec3 normal)
 	brightness = mrt.scene.amb_light.brightness;
 	while (lights)
 	{
-		if (lights->type == SPOT_LIGHT)
-			light_dir = vec3_diff(
-					((t_light *)(lights->object))->origin_o_dir, point);
-		else if (lights->type == DIR_LIGHT)
-			light_dir = ((t_light *)(lights->object))->origin_o_dir;
-		else
+		if (lights->type == SPOT_LIGHT || lights->type == DIR_LIGHT)
 		{
-			lights = lights->next;
-			continue ;
+			if (lights->type == SPOT_LIGHT)
+				light_dir = vec3_diff(
+						((t_light *)(lights->object))->origin_o_dir, point);
+			else if (lights->type == DIR_LIGHT)
+				light_dir = ((t_light *)(lights->object))->origin_o_dir;
+			if (vec3_dot_prdct(normal, light_dir) > 0)
+				brightness += ((t_light *)(lights->object))->brightness
+					* vec3_dot_prdct(normal, light_dir)
+					/ (vec3_magnitude(normal) * vec3_magnitude(light_dir));
 		}
-		if (vec3_dot_prdct(normal, light_dir) > 0)
-			brightness += ((t_light *)(lights->object))->brightness
-				* vec3_dot_prdct(normal, light_dir)
-				/ (vec3_magnitude(normal) * vec3_magnitude(light_dir));
 		lights = lights->next;
 	}
+	if (brightness > 1.0)
+		return (1.0);
 	return (brightness);
 }

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:24:29 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 16:30:10 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/08/17 03:55:52 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void		ft_resetflag(int *flags, int flag);
 
 int			ft_max(int a, int b);
 int			ft_min(int a, int b);
+double		ft_max_d(double a, double b);
+double		ft_min_d(double a, double b);
 
 size_t		ft_strlen(const char *s);
 size_t		ft_strlen_c(const char *s, char end_c);

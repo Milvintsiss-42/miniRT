@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:20:54 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/08/06 19:51:52 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/08/17 03:59:07 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,5 @@ double	compute_lighting(t_mrt mrt, t_vec3 point, t_vec3 normal)
 		}
 		lights = lights->next;
 	}
-	if (brightness > 1.0)
-		return (1.0);
-	return (brightness);
+	return (ft_min_d(brightness, 1.0));
 }

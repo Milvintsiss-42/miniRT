@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:01:42 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 20:18:52 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/09/05 23:52:05 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	add_cylinder(t_mrt *mrt, t_parsing *parsing)
 {
 	t_cylinder	cylinder;
 
-	if (ft_splitlen(parsing->s_line) != 6)
+	if (ft_splitlen(parsing->s_line) != 7)
 		parsing_error(mrt, *parsing, ERR_INVALID_NUMBER_OF_ARGUMENTS, true);
 	if (!parse_vector(parsing->s_line[1], &cylinder.origin))
 		parsing_error(mrt, *parsing, ERR_INVALID_VECTOR, true);
@@ -44,5 +44,9 @@ void	add_cylinder(t_mrt *mrt, t_parsing *parsing)
 		parsing_error(mrt, *parsing, ERR_INVALID_FLOATING_POINT, true);
 	if (!parse_color(parsing->s_line[5], &cylinder.color))
 		parsing_error(mrt, *parsing, ERR_INVALID_COLOR, true);
+	if (!parse_int(parsing->s_line[6], &cylinder.specular))
+		parsing_error(mrt, *parsing, ERR_INVALID_INT, true);
+	if (cylinder.specular < -1)
+		parsing_error(mrt, *parsing, ERR_OUT_OF_RANGE, true);
 	add_cylinder_to_scene_objects(mrt, parsing, cylinder);
 }

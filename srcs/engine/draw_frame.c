@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/09/05 05:36:10 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/09/06 00:20:38 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,20 @@ t_quadratic	intersect_ray_sphere(t_vec3 origin, t_vec3 dir, t_sphere sphere)
 	return (s);
 }
 
+// See the function compute_lighting for more informations about the variables
+// in the t_point struct.
 int	compute_sphere_point_color(t_mrt mrt, t_vec3 origin, t_vec3 dir,
 	t_sphere sphere, double closest_t)
 {
-	t_vec3	point;
-	t_vec3	normal;
+	t_point	point;
 	t_vec3	color;
 
-	point = vec3_sum(origin, vec3_scal_prdct(dir, closest_t));
-	normal = vec3_normalize(vec3_diff(point, sphere.origin));
-	color = vec3_scal_prdct(sphere.color, compute_lighting(mrt, point, normal));
+	point.p = vec3_sum(origin, vec3_scal_prdct(dir, closest_t));
+	point.n = vec3_normalize(vec3_diff(point.p, sphere.origin));
+	point.v = vec3_scal_prdct(dir, -1);
+	point.s = sphere.specular;
+	compute_lighting(mrt, &point);
+	color = vec3_scal_prdct(sphere.color, point.b);
 	return (t_vec3_color_to_int(color));
 }
 

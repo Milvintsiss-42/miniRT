@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:01:42 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 20:12:31 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/09/05 23:51:42 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	add_plane(t_mrt *mrt, t_parsing *parsing)
 {
 	t_plane	plane;
 
-	if (ft_splitlen(parsing->s_line) != 4)
+	if (ft_splitlen(parsing->s_line) != 5)
 		parsing_error(mrt, *parsing, ERR_INVALID_NUMBER_OF_ARGUMENTS, true);
 	if (!parse_vector(parsing->s_line[1], &plane.origin))
 		parsing_error(mrt, *parsing, ERR_INVALID_VECTOR, true);
@@ -40,5 +40,9 @@ void	add_plane(t_mrt *mrt, t_parsing *parsing)
 		parsing_error(mrt, *parsing, ERR_INVALID_NORM_VECTOR, true);
 	if (!parse_color(parsing->s_line[3], &plane.color))
 		parsing_error(mrt, *parsing, ERR_INVALID_COLOR, true);
+	if (!parse_int(parsing->s_line[4], &plane.specular))
+		parsing_error(mrt, *parsing, ERR_INVALID_INT, true);
+	if (plane.specular < -1)
+		parsing_error(mrt, *parsing, ERR_OUT_OF_RANGE, true);
 	add_plane_to_scene_objects(mrt, parsing, plane);
 }

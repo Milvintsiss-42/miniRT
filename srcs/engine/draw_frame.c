@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 16:31:00 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/09/05 05:36:10 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,11 @@ void	draw_frame(t_mrt *mrt)
 	t_vec3	dir;
 	int		color;
 
-	x = -mrt->mlx.win_width / 2;
-	while (x < mrt->mlx.win_width / 2)
+	x = -mrt->mlx.win_width / 2 - 1;
+	while (x < mrt->mlx.win_width / 2 + 1)
 	{
-		y = -mrt->mlx.win_height / 2;
-		while (y < mrt->mlx.win_height / 2)
+		y = -mrt->mlx.win_height / 2 - 1;
+		while (y < mrt->mlx.win_height / 2 + 1)
 		{
 			dir = canvas_to_viewport(mrt, x, y);
 			color = trace_ray(mrt, mrt->scene.camera.origin, dir);

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/09/06 00:10:17 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/09 05:35:09 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@
 # include "common.h"
 # include "objects.h"
 
-# define DOUBLE_MAX()	1.0 / 0.0
-
 # define VP_DIST	1
-# define T_MIN		1.0
-# define T_MAX		DOUBLE_MAX()
 
 typedef struct s_viewport
 {
@@ -51,12 +47,20 @@ typedef struct s_point
 	double	b;
 }	t_point;
 
+typedef struct s_intersect
+{
+	t_l_obj	*obj;
+	double	closest_t;
+}	t_intersect;
+
 typedef struct s_mrt	t_mrt;
 
 void		draw_frame(t_mrt *mrt);
+t_intersect	closest_intersection(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
+				double t_min, double t_max);
 void		draw_test_card_f(t_mrt *mrt);
 
-void		compute_lighting(t_mrt mrt, t_point *p);
+void		compute_lighting(t_mrt *mrt, t_point *p);
 int			t_vec3_color_to_int(t_vec3 color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 05:35:09 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/09 09:21:54 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "common.h"
 # include "objects.h"
+
+# define REFLECT_REC_DEPTH	3
 
 # define VP_DIST	1
 
@@ -45,6 +47,7 @@ typedef struct s_point
 	t_vec3	l;
 	t_vec3	r;
 	double	b;
+	int		color;
 }	t_point;
 
 typedef struct s_intersect
@@ -58,9 +61,12 @@ typedef struct s_mrt	t_mrt;
 void		draw_frame(t_mrt *mrt);
 t_intersect	closest_intersection(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
 				double t_min, double t_max);
+t_vec3		reflect_ray(t_vec3 ray, t_vec3 normal);
 void		draw_test_card_f(t_mrt *mrt);
 
 void		compute_lighting(t_mrt *mrt, t_point *p);
 int			t_vec3_color_to_int(t_vec3 color);
+t_vec3		int_color_to_t_vec3(int color);
+int			blend_colors(int color1, int color2, double ratio);
 
 #endif

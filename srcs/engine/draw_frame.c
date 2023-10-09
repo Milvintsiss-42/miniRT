@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 05:40:30 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/09 09:29:16 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ t_vec3	canvas_to_viewport(t_mrt *mrt, int x, int y)
 	vp.y = y * mrt->scene.viewport.h / mrt->mlx.win_height;
 	vp.z = VP_DIST;
 	return (vp);
+}
+
+/// @brief Computes the reflection of a ray on a surface.
+/// This use the following equation:
+/// 2 * normal * (normal . ray) - ray
+/// @param ray The ray to reflect.
+/// @param normal The normal of the surface.
+t_vec3	reflect_ray(t_vec3 ray, t_vec3 normal)
+{
+	return (vec3_diff(
+			vec3_scal_prdct(
+				vec3_scal_prdct(normal, 2.0),
+				vec3_dot_prdct(normal, ray)),
+			ray));
 }
 
 /// @brief Computes the intersections between a ray and a sphere.
@@ -61,19 +75,18 @@ t_quadratic	intersect_ray_sphere(t_vec3 origin, t_vec3 dir, t_sphere sphere)
 
 // See the function compute_lighting for more informations about the variables
 // in the t_point struct.
-int	compute_sphere_point_color(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
+t_point	compute_sphere_point_color(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
 	t_sphere sphere, double closest_t)
 {
 	t_point	point;
-	t_vec3	color;
 
 	point.p = vec3_sum(origin, vec3_scal_prdct(dir, closest_t));
 	point.n = vec3_normalize(vec3_diff(point.p, sphere.origin));
 	point.v = vec3_scal_prdct(dir, -1);
 	point.s = sphere.specular;
 	compute_lighting(mrt, &point);
-	color = vec3_scal_prdct(sphere.color, point.b);
-	return (t_vec3_color_to_int(color));
+	point.color = t_vec3_color_to_int(vec3_scal_prdct(sphere.color, point.b));
+	return (point);
 }
 
 t_intersect	closest_intersection(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
@@ -109,18 +122,28 @@ t_intersect	closest_intersection(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
 }
 
 int	trace_ray(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
-	double t_min, double t_max)
+	double t_min, double t_max, int reflect_rec_depth)
 {
 	t_intersect	clst_intersect;
+	t_point		point;
+	int			reflected_color;
+	double		reflection;
 
 	clst_intersect = closest_intersection(mrt, origin, dir, t_min, t_max);
 	if (!clst_intersect.obj)
 		return (BACKGROUND_COLOR);
 	if (clst_intersect.obj->type == SPHERE)
-		return (compute_sphere_point_color(mrt, origin, dir,
-				*(t_sphere *)(clst_intersect.obj->object),
-			clst_intersect.closest_t));
-	return (0);
+	{
+		point = (compute_sphere_point_color(mrt, origin, dir,
+					*(t_sphere *)(clst_intersect.obj->object),
+					clst_intersect.closest_t));
+		reflection = ((t_sphere *)(clst_intersect.obj->object))->reflect;
+	}
+	if (reflect_rec_depth <= 0 || reflection <= 0.0)
+		return (point.color);
+	reflected_color = trace_ray(mrt, point.p, reflect_ray(point.v, point.n),
+			0.0000001, __DBL_MAX__, reflect_rec_depth - 1);
+	return (blend_colors(point.color, reflected_color, 1 - reflection));
 }
 
 void	draw_frame(t_mrt *mrt)
@@ -138,7 +161,7 @@ void	draw_frame(t_mrt *mrt)
 		{
 			dir = canvas_to_viewport(mrt, x, y);
 			color = trace_ray(mrt, mrt->scene.camera.origin, dir,
-					1.0, __DBL_MAX__);
+					1.0, __DBL_MAX__, REFLECT_REC_DEPTH);
 			put_pixel_on_img(mrt, x, y, color);
 			y++;
 		}

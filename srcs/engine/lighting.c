@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:20:54 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 05:49:47 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/09 08:10:27 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ static void	compute_specular_light(t_point *p, t_light light)
 {
 	double	r_dot_v;
 
-	p->r = vec3_diff(
-			vec3_scal_prdct(
-				vec3_scal_prdct(p->n, 2.0),
-				vec3_dot_prdct(p->n, p->l)),
-			p->l);
+	p->r = reflect_ray(p->l, p->n);
 	r_dot_v = vec3_dot_prdct(p->r, p->v);
 	if (r_dot_v > 0)
 		p->b += light.brightness

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/09/05 04:41:35 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/09 07:48:31 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_sphere
 	double	diameter;
 	t_vec3	color;
 	int		specular;
+	double	reflect;
 }	t_sphere;
 
 typedef struct s_plane
@@ -66,6 +67,7 @@ typedef struct s_plane
 	t_vec3	orientation;
 	t_vec3	color;
 	int		specular;
+	double	reflect;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -76,6 +78,7 @@ typedef struct s_cylinder
 	double	height;
 	t_vec3	color;
 	int		specular;
+	double	reflect;
 }	t_cylinder;
 
 bool		l_obj_add_back(t_l_obj **l_obj, void *object, t_obj_type type);

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:23:48 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 17:37:27 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 00:47:38 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,8 @@ void	set_camera(t_mrt *mrt, t_parsing *parsing)
 		parsing_error(mrt, *parsing, ERR_INVALID_INT, true);
 	if (camera->fov < 0 || camera->fov > 180)
 		parsing_error(mrt, *parsing, ERR_OUT_OF_RANGE, true);
+	mrt->scene.camera.roll = 0;
+	mrt->scene.camera.yaw = atan2(mrt->scene.camera.orientation.x,
+			mrt->scene.camera.orientation.z);
+	mrt->scene.camera.pitch = -asin(-mrt->scene.camera.orientation.y);
 }

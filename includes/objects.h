@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 07:48:31 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:53:02 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ typedef struct s_camera
 	t_vec3	origin;
 	t_vec3	orientation;
 	int		fov;
+	double	yaw;
+	double	pitch;
+	double	roll;
 }	t_camera;
 
 typedef struct s_light

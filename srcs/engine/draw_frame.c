@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 09:29:16 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 00:58:14 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,18 @@ int	trace_ray(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
 	return (blend_colors(point.color, reflected_color, 1 - reflection));
 }
 
+t_vec3	get_ray_direction(t_mrt *mrt, int x, int y)
+{
+	t_vec3	base_direction;
+
+	base_direction = canvas_to_viewport(mrt, x, y);
+	return (rotate_vec3(base_direction,
+			mrt->scene.camera.roll,
+			mrt->scene.camera.yaw,
+			mrt->scene.camera.pitch
+		));
+}
+
 void	draw_frame(t_mrt *mrt)
 {
 	int		x;
@@ -159,7 +171,7 @@ void	draw_frame(t_mrt *mrt)
 		y = -mrt->mlx.win_height / 2 - 1;
 		while (y < mrt->mlx.win_height / 2 + 1)
 		{
-			dir = canvas_to_viewport(mrt, x, y);
+			dir = get_ray_direction(mrt, x, y);
 			color = trace_ray(mrt, mrt->scene.camera.origin, dir,
 					1.0, __DBL_MAX__, REFLECT_REC_DEPTH);
 			put_pixel_on_img(mrt, x, y, color);

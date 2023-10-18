@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:23:46 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/04/27 22:55:17 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 01:25:47 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,4 @@ t_vec3	vec3_normalize(t_vec3 vec)
 	ret.y = vec.y / magnitude;
 	ret.z = vec.z / magnitude;
 	return (ret);
-}
-
-// Compute the angle between [vec1] and [vec2].
-double	vec3_ang_btwn(t_vec3 vec1, t_vec3 vec2)
-{
-	double	magnitude1;
-	double	magnitude2;
-	double	dot_prdct;
-
-	magnitude1 = vec3_magnitude(vec1);
-	magnitude2 = vec3_magnitude(vec2);
-	dot_prdct = vec3_dot_prdct(vec1, vec2);
-	return (acos(dot_prdct / (magnitude1 * magnitude2)));
 }

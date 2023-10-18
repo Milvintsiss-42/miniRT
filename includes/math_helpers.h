@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:43:48 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/05/31 20:32:40 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 01:22:25 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ typedef struct s_quadratic {
 	double	t2;
 }	t_quadratic;
 
+double		deg_to_rad(double deg);
+double		rad_to_deg(double rad);
+double		vec3_ang_btwn(t_vec3 vec1, t_vec3 vec2);
+
 t_vec3		vec3_sum(t_vec3 vec1, t_vec3 vec2);
 t_vec3		vec3_diff(t_vec3 vec1, t_vec3 vec2);
 double		vec3_magnitude(t_vec3 vec);
@@ -42,6 +46,7 @@ t_vec3		vec3_normalize(t_vec3 vec);
 double		vec3_dot_prdct(t_vec3 vec1, t_vec3 vec2);
 t_vec3		vec3_scal_prdct(t_vec3 vec, double scalar);
 t_vec3		vec3_cross_prdct(t_vec3 vec1, t_vec3 vec2);
-double		vec3_ang_btwn(t_vec3 vec1, t_vec3 vec2);
+
+t_vec3		rotate_vec3(t_vec3 vec, double roll, double yaw, double pitch);
 
 #endif

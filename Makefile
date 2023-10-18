@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/06/15 16:31:39 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/10/19 00:56:00 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS		= $(addsuffix .c, \
 	) \
 	$(addprefix math_helpers/, \
 		angle_helpers \
+		matrix_helpers \
 		vec3_basics \
 		vec3_products \
 	) \

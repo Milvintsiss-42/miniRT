@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/19 03:05:37 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 06:05:17 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@
 
 # define REFLECT_REC_DEPTH	3
 
-# define VP_DIST	1
-
 typedef struct s_viewport
 {
 	double	w;
 	double	h;
+	double	dist;
 }	t_viewport;
 
 typedef struct s_scene

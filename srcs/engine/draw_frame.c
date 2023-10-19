@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/19 03:23:24 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 04:19:03 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vec3	canvas_to_viewport(t_mrt *mrt, int x, int y)
 
 	vp.x = x * mrt->scene.viewport.w / mrt->mlx.win_width;
 	vp.y = y * mrt->scene.viewport.h / mrt->mlx.win_height;
-	vp.z = VP_DIST;
+	vp.z = mrt->scene.viewport.dist;
 	return (vp);
 }
 

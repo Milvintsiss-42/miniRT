@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 09:26:51 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 03:25:03 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,13 @@
 
 # define KEY_ECHAP		0xff1b
 
-# define BACKGROUND_COLOR	0x000000
+# define RED				0xFF0000
+# define GREEN				0x00FF00
+# define BLUE				0x0000FF
+# define WHITE				0xFFFFFF
+# define BLACK				0x000000
+
+# define BACKGROUND_COLOR	BLACK
 
 typedef struct s_mlx {
 	void	*mlx;

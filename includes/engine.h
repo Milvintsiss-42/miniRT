@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 09:21:54 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 03:05:37 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_intersect
 {
 	t_l_obj	*obj;
 	double	closest_t;
+	bool	is_border;
 }	t_intersect;
 
 typedef struct s_mrt	t_mrt;

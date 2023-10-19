@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/19 00:58:14 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 03:23:24 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,13 @@ t_quadratic	intersect_ray_sphere(t_vec3 origin, t_vec3 dir, t_sphere sphere)
 // See the function compute_lighting for more informations about the variables
 // in the t_point struct.
 t_point	compute_sphere_point_color(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
-	t_sphere sphere, double closest_t)
+	t_intersect intersect)
 {
-	t_point	point;
+	t_point		point;
+	t_sphere	sphere;
 
-	point.p = vec3_sum(origin, vec3_scal_prdct(dir, closest_t));
+	sphere = *(t_sphere *)(intersect.obj->object);
+	point.p = vec3_sum(origin, vec3_scal_prdct(dir, intersect.closest_t));
 	point.n = vec3_normalize(vec3_diff(point.p, sphere.origin));
 	point.v = vec3_scal_prdct(dir, -1);
 	point.s = sphere.specular;
@@ -98,6 +100,7 @@ t_intersect	closest_intersection(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
 
 	intersection.closest_t = __DBL_MAX__;
 	intersection.obj = NULL;
+	intersection.is_border = false;
 	obj_iter = mrt->scene.objects;
 	while (obj_iter)
 	{
@@ -115,6 +118,10 @@ t_intersect	closest_intersection(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
 				intersection.closest_t = t.t2;
 				intersection.obj = obj_iter;
 			}
+			if (intersection.obj == obj_iter && fabs(t.t1 - t.t2) < 0.5)
+				intersection.is_border = true;
+			else if (intersection.obj == obj_iter)
+				intersection.is_border = false;
 		}
 		obj_iter = obj_iter->next;
 	}
@@ -134,11 +141,11 @@ int	trace_ray(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
 		return (BACKGROUND_COLOR);
 	if (clst_intersect.obj->type == SPHERE)
 	{
-		point = (compute_sphere_point_color(mrt, origin, dir,
-					*(t_sphere *)(clst_intersect.obj->object),
-					clst_intersect.closest_t));
+		point = compute_sphere_point_color(mrt, origin, dir, clst_intersect);
 		reflection = ((t_sphere *)(clst_intersect.obj->object))->reflect;
 	}
+	if (clst_intersect.obj->is_selected && clst_intersect.is_border)
+		return (RED);
 	if (reflect_rec_depth <= 0 || reflection <= 0.0)
 		return (point.color);
 	reflected_color = trace_ray(mrt, point.p, reflect_ray(point.v, point.n),

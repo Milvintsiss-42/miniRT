@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:39:39 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 19:16:40 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 03:19:24 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	l_obj_add_back(t_l_obj **l_obj, void *object, t_obj_type type)
 	new->object = object;
 	new->type = type;
 	new->next = 0;
+	new->is_selected = false;
 	if (!*l_obj)
 		*l_obj = new;
 	else

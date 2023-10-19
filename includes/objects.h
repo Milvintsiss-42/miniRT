@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/17 16:53:02 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 03:18:30 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_l_object
 	void				*object;
 	t_obj_type			type;
 	struct s_l_object	*next;
+	bool				is_selected;
 }	t_l_obj;
 
 typedef struct s_amb_light

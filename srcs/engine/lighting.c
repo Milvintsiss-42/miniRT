@@ -6,22 +6,29 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:20:54 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 08:10:27 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 07:28:26 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-static void	compute_specular_light(t_point *p, t_light light)
+static t_vec3	brightness_color_wise(double brightness, t_vec3 color)
 {
-	double	r_dot_v;
+	t_vec3	ret;
 
-	p->r = reflect_ray(p->l, p->n);
-	r_dot_v = vec3_dot_prdct(p->r, p->v);
-	if (r_dot_v > 0)
-		p->b += light.brightness
-			* pow(r_dot_v / (vec3_magnitude(p->r) * vec3_magnitude(p->v)),
-				p->s);
+	ret.x = (color.x / 255) * brightness;
+	ret.y = (color.y / 255) * brightness;
+	ret.z = (color.z / 255) * brightness;
+	return (ret);
+}
+
+static t_vec3	light_direction(t_obj_type light_type, t_light light, t_point p)
+{
+	if (light_type == SPOT_LIGHT)
+		return (vec3_diff(light.origin_o_dir, p.p));
+	else if (light_type == DIR_LIGHT)
+		return (light.origin_o_dir);
+	return ((t_vec3){0, 0, 0});
 }
 
 static bool	is_in_shadow(t_mrt *mrt, t_point p, t_l_obj light)
@@ -38,6 +45,29 @@ static bool	is_in_shadow(t_mrt *mrt, t_point p, t_l_obj light)
 	if (!clst_inter.obj)
 		return (false);
 	return (true);
+}
+
+static double	compute_diffuse_light(t_point *p, t_light light)
+{
+	if (vec3_dot_prdct(p->n, p->l) > 0)
+		return (light.brightness * vec3_dot_prdct(p->n, p->l)
+			/ (vec3_magnitude(p->n) * vec3_magnitude(p->l)));
+	return (0.0);
+}
+
+static double	compute_specular_light(t_point *p, t_light light)
+{
+	double	r_dot_v;
+
+	if (p->s == -1)
+		return (0.0);
+	p->r = reflect_ray(p->l, p->n);
+	r_dot_v = vec3_dot_prdct(p->r, p->v);
+	if (r_dot_v > 0)
+		return (light.brightness
+			* pow(r_dot_v / (vec3_magnitude(p->r) * vec3_magnitude(p->v)),
+				p->s));
+	return (0.0);
 }
 
 /// @brief Computes the brightness of a point, based on the ambient light and
@@ -59,27 +89,27 @@ void	compute_lighting(t_mrt *mrt, t_point *p)
 {
 	t_l_obj	*l_lights;
 	t_light	light;
+	double	brightness;
 
 	l_lights = mrt->scene.lights;
-	p->b = mrt->scene.amb_light.brightness;
+	p->b = brightness_color_wise(mrt->scene.amb_light.brightness,
+			mrt->scene.amb_light.color);
 	while (l_lights)
 	{
+		brightness = 0;
 		light = (t_light)(*(t_light *)(l_lights->object));
-		if (l_lights->type == SPOT_LIGHT)
-			p->l = vec3_diff(light.origin_o_dir, p->p);
-		else if (l_lights->type == DIR_LIGHT)
-			p->l = light.origin_o_dir;
+		p->l = light_direction(l_lights->type, light, *p);
 		if (is_in_shadow(mrt, *p, *l_lights))
 		{
 			l_lights = l_lights->next;
 			continue ;
 		}
-		if (vec3_dot_prdct(p->n, p->l) > 0)
-			p->b += light.brightness * vec3_dot_prdct(p->n, p->l)
-				/ (vec3_magnitude(p->n) * vec3_magnitude(p->l));
-		if (p->s != -1)
-			compute_specular_light(p, light);
+		brightness += compute_diffuse_light(p, light);
+		brightness += compute_specular_light(p, light);
+		p->b = vec3_sum(p->b, brightness_color_wise(brightness, light.color));
 		l_lights = l_lights->next;
 	}
-	p->b = ft_min_d(p->b, 1.0);
+	p->b.x = ft_min_d(p->b.x, 1.0);
+	p->b.y = ft_min_d(p->b.y, 1.0);
+	p->b.z = ft_min_d(p->b.z, 1.0);
 }

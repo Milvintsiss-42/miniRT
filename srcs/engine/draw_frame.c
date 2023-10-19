@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/19 04:19:03 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 06:48:35 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ t_point	compute_sphere_point_color(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
 	point.v = vec3_scal_prdct(dir, -1);
 	point.s = sphere.specular;
 	compute_lighting(mrt, &point);
-	point.color = t_vec3_color_to_int(vec3_scal_prdct(sphere.color, point.b));
+	sphere.color.x *= point.b.x;
+	sphere.color.y *= point.b.y;
+	sphere.color.z *= point.b.z;
+	point.color = t_vec3_color_to_int(sphere.color);
 	return (point);
 }
 

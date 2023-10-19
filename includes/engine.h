@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/19 06:05:17 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/19 06:36:56 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_point
 	int		s;
 	t_vec3	l;
 	t_vec3	r;
-	double	b;
+	t_vec3	b;
 	int		color;
 }	t_point;
 

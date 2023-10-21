@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/21 04:21:35 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/21 07:57:23 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,9 @@ t_intersect	closest_intersection(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
 				intersection.closest_t = t.t2;
 				intersection.obj = obj_iter;
 			}
-			if (intersection.obj == obj_iter && fabs(t.t1 - t.t2) < 0.5)
+			if (intersection.obj == obj_iter && fabs(t.t1 - t.t2)
+				< (((double)mrt->scene.camera.fov / 180)
+					* sqrt(((t_sphere *)(obj_iter->object))->diameter)) / 2)
 				intersection.is_border = true;
 			else if (intersection.obj == obj_iter)
 				intersection.is_border = false;

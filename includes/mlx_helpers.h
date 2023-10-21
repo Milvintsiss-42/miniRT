@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:47:46 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/19 15:35:06 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/21 02:42:34 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 void		put_pixel_on_img(t_mrt *mrt, int x, int y, int color);
 
-void		reframe(t_mrt *mrt);
+int			reframe(t_mrt *mrt);
 void		open_window(t_mrt *mrt, double width_fraction,
 				double height_fraction);
 

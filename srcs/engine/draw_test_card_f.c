@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:24:43 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/04/27 16:50:03 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/21 04:16:00 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,16 @@ void	draw_test_card_f(t_mrt *mrt)
 	int					y;
 	unsigned long long	seed;
 
-	x = -mrt->mlx.win_width / 2;
-	while (x < mrt->mlx.win_width / 2)
+	x = 0;
+	while (x < mrt->mlx.win_width)
 	{
-		y = -mrt->mlx.win_height / 2;
-		while (y < mrt->mlx.win_height / 2)
+		y = 0;
+		while (y < mrt->mlx.win_height)
 		{
 			seed = y * mrt->mlx.win_width + x;
 			put_pixel_on_img(mrt, x, y, random_color_from_seed(seed));
 			y++;
 		}
 		x++;
-		print_progress(x, -mrt->mlx.win_width / 2, mrt->mlx.win_width / 2);
 	}
 }

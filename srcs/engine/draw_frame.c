@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/21 02:53:51 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/21 04:21:35 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_vec3	canvas_to_viewport(t_mrt *mrt, int x, int y)
 {
 	t_vec3	vp;
 
+	x -= mrt->mlx.win_width / 2;
+	y = mrt->mlx.win_height / 2 - y;
 	vp.x = x * mrt->scene.viewport.w / mrt->mlx.win_width;
 	vp.y = y * mrt->scene.viewport.h / mrt->mlx.win_height;
 	vp.z = mrt->scene.viewport.dist;
@@ -196,11 +198,11 @@ void	draw_frame(t_mrt *mrt)
 	int		color;
 
 	set_viewport_dimensions(mrt);
-	x = -mrt->mlx.win_width / 2 - 1;
-	while (x < mrt->mlx.win_width / 2 + 1)
+	x = 0;
+	while (x < mrt->mlx.win_width)
 	{
-		y = -mrt->mlx.win_height / 2 - 1;
-		while (y < mrt->mlx.win_height / 2 + 1)
+		y = 0;
+		while (y < mrt->mlx.win_height)
 		{
 			dir = get_ray_direction(mrt, x, y);
 			color = trace_ray(mrt, mrt->scene.camera.origin, dir,

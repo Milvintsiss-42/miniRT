@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/19 03:18:30 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/21 02:49:22 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_amb_light
 typedef struct s_camera
 {
 	t_vec3	origin;
-	t_vec3	orientation;
+	t_vec3	start_dir;
 	int		fov;
 	double	yaw;
 	double	pitch;

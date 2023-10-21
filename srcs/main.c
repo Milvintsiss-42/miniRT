@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:58:25 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 16:32:14 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/21 02:57:24 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static void	init_scene_values(t_scene *scene)
 	scene->amb_light.color.z = -1.0;
 	scene->camera.fov = -1;
 	scene->camera.origin = (t_vec3){-1, -1, -1};
-	scene->camera.orientation = (t_vec3){-1, -1, -1};
+	scene->camera.start_dir = (t_vec3){-1, -1, -1};
+	scene->camera.yaw = 0;
+	scene->camera.pitch = 0;
+	scene->camera.roll = 0;
 	scene->lights = 0;
 	scene->objects = 0;
 }

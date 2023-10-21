@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/21 02:44:41 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/21 02:53:51 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,26 @@ t_vec3	get_ray_direction(t_mrt *mrt, int x, int y)
 		));
 }
 
+static void	set_viewport_dimensions(t_mrt *mrt)
+{
+	mrt->scene.viewport.w = 1.0;
+	mrt->scene.viewport.h = 1.0;
+	if (mrt->mlx.win_width >= mrt->mlx.win_height)
+	{
+		mrt->scene.viewport.w
+			= mrt->scene.viewport.w * mrt->mlx.win_width / mrt->mlx.win_height;
+		mrt->scene.viewport.dist = (mrt->scene.viewport.w / 2.0)
+			/ tan(deg_to_rad(mrt->scene.camera.fov / 2.0));
+	}
+	else
+	{
+		mrt->scene.viewport.h
+			= mrt->scene.viewport.h * mrt->mlx.win_height / mrt->mlx.win_width;
+		mrt->scene.viewport.dist = (mrt->scene.viewport.h / 2.0)
+			/ tan(deg_to_rad(mrt->scene.camera.fov / 2.0));
+	}
+}
+
 void	draw_frame(t_mrt *mrt)
 {
 	int		x;
@@ -175,6 +195,7 @@ void	draw_frame(t_mrt *mrt)
 	t_vec3	dir;
 	int		color;
 
+	set_viewport_dimensions(mrt);
 	x = -mrt->mlx.win_width / 2 - 1;
 	while (x < mrt->mlx.win_width / 2 + 1)
 	{

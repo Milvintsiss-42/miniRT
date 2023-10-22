@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/10/21 03:31:00 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/10/22 08:47:50 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS		= $(addsuffix .c, \
 	) \
 	$(addprefix object_helpers/, \
 		object_lists \
+		object_getters \
 	) \
 	$(addprefix math_helpers/, \
 		angle_helpers \

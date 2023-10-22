@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/21 02:49:22 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 08:46:01 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,11 @@ typedef struct s_cylinder
 bool		l_obj_add_back(t_l_obj **l_obj, void *object, t_obj_type type);
 t_l_obj		*l_obj_last(t_l_obj *l_obj);
 void		free_object_list(t_l_obj *list);
+
+t_vec3		*get_obj_origin(t_l_obj *obj);
+t_vec3		*get_obj_orientation(t_l_obj *obj);
+t_vec3		*get_obj_color(t_l_obj *obj);
+int			*get_obj_specular(t_l_obj *obj);
+double		*get_obj_reflection(t_l_obj *obj);
 
 #endif

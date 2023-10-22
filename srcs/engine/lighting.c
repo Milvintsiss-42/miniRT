@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:20:54 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/19 07:28:26 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 05:55:29 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ static bool	is_in_shadow(t_mrt *mrt, t_point p, t_l_obj light)
 		t_max = 1.0;
 	else if (light.type == DIR_LIGHT)
 		t_max = __DBL_MAX__;
-	clst_inter = closest_intersection(mrt, p.p, p.l, 0.0000001, t_max);
-	if (!clst_inter.obj)
-		return (false);
-	return (true);
+	clst_inter = closest_intersection(mrt, (t_ray){p.p, p.l}, LOW_DBL, t_max);
+	return (clst_inter.obj != NULL);
 }
 
 static double	compute_diffuse_light(t_point *p, t_light light)

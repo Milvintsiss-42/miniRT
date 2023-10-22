@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/19 03:25:03 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 03:36:07 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@
 # define BLUE				0x0000FF
 # define WHITE				0xFFFFFF
 # define BLACK				0x000000
+# define NATURAL_LIGHT 		0xF1EBC8
 
-# define BACKGROUND_COLOR	BLACK
+# define BACKGROUND_COLOR	NATURAL_LIGHT
 
 typedef struct s_mlx {
 	void	*mlx;

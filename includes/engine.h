@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/21 04:25:48 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 05:04:56 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "objects.h"
 
 # define REFLECT_REC_DEPTH	3
+
+# define LOW_DBL			0.0000001
 
 typedef struct s_viewport
 {
@@ -56,12 +58,18 @@ typedef struct s_intersect
 	bool	is_border;
 }	t_intersect;
 
+typedef struct s_ray
+{
+	t_vec3	origin;
+	t_vec3	dir;
+}	t_ray;
+
 typedef struct s_mrt	t_mrt;
 
 void		draw_frame(t_mrt *mrt);
 t_vec3		canvas_to_viewport(t_mrt *mrt, int x, int y);
 t_vec3		get_ray_direction(t_mrt *mrt, int x, int y);
-t_intersect	closest_intersection(t_mrt *mrt, t_vec3 origin, t_vec3 dir,
+t_intersect	closest_intersection(t_mrt *mrt, t_ray ray,
 				double t_min, double t_max);
 t_vec3		reflect_ray(t_vec3 ray, t_vec3 normal);
 void		draw_test_card_f(t_mrt *mrt);

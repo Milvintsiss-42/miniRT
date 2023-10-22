@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 02:35:34 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/21 10:31:40 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:07:06 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 t_l_obj	*select_object(t_mrt *mrt, int x, int y)
 {
-	t_vec3		ray_dir;
+	t_ray		ray;
 	t_intersect	intersect;
 
-	ray_dir = get_ray_direction(mrt, x, y);
-	intersect = closest_intersection(mrt, mrt->scene.camera.origin, ray_dir,
-			1.0, __DBL_MAX__);
+	ray.origin = mrt->scene.camera.origin;
+	ray.dir = get_ray_direction(mrt, x, y);
+	intersect = closest_intersection(mrt, ray, 1.0, __DBL_MAX__);
 	if (!intersect.obj)
 		return (NULL);
 	intersect.obj->is_selected = !intersect.obj->is_selected;

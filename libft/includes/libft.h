@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:24:29 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/08/17 03:55:52 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 11:55:22 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int			ft_isspace(int c);
 void		ft_setflag(int *flags, int flag);
 int			ft_checkflag(int flags, int flag);
 void		ft_resetflag(int *flags, int flag);
+void		ft_toggleflag(int *flags, int flag);
 
 int			ft_max(int a, int b);
 int			ft_min(int a, int b);

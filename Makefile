@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/10/22 08:47:50 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/10/22 10:06:38 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS		= $(addsuffix .c, \
 		mouse_events \
 	) \
 	$(addprefix object_helpers/, \
+		camera_helpers \
 		object_lists \
 		object_getters \
 	) \

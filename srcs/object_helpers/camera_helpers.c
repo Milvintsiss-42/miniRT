@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 09:35:14 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 09:42:35 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:24:00 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ void	rotate_camera(t_mrt *mrt, double yaw, double pitch, double roll)
 	mrt->scene.camera.yaw += yaw;
 	mrt->scene.camera.pitch += pitch;
 	mrt->scene.camera.roll += roll;
+}
+
+void	translate_camera(t_mrt *mrt, t_axis axis, int direction)
+{
+	mrt->scene.camera.origin = (t_vec3){
+		mrt->scene.camera.origin.x + (direction * TRANSLATE_SPEED
+			* (axis == X)),
+		mrt->scene.camera.origin.y + (direction * TRANSLATE_SPEED
+			* (axis == Y)),
+		mrt->scene.camera.origin.z + (direction * TRANSLATE_SPEED
+			* (axis == Z))};
 }
 
 void	camera_natural_zoom(t_mrt *mrt, int direction, int x, int y)

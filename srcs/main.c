@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:58:25 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/21 02:57:24 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:04:34 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ static void	init_mrt_data(t_mrt *mrt, int argc, char const **argv)
 	mrt->mlx.win_width = 0;
 	mrt->img.current = null_img();
 	mrt->img.future = null_img();
+	mrt->event_mode.mode = RESIZE;
+	mrt->event_mode.axis = X;
+	mrt->event_mode.flags = FLAG_CAMERA | FLAG_HEIGHT;
 	init_scene_values(&mrt->scene);
 }
 

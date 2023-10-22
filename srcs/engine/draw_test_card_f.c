@@ -6,11 +6,11 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:24:43 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/21 04:16:00 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 11:20:51 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_helpers.h"
+#include "common.h"
 
 // See https://youtu.be/Qz0KTGYJtUk?t=544 for detailled explanations
 static unsigned long long	random_number(unsigned long long *state)

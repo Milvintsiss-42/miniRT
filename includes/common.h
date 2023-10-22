@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 03:36:07 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 11:21:31 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include "libft.h"
 # include "mlx.h"
+# include "mlx_helpers.h"
 # include "engine.h"
 # include "img_helpers.h"
 
@@ -44,18 +45,12 @@
 
 # define BACKGROUND_COLOR	NATURAL_LIGHT
 
-typedef struct s_mlx {
-	void	*mlx;
-	void	*window;
-	int		win_height;
-	int		win_width;
-}	t_mlx;
-
 typedef struct s_mrt {
 	const char		*bin_name;
 	t_mlx			mlx;
 	t_img_garbage	img;
 	t_scene			scene;
+	t_event_mode	event_mode;
 }	t_mrt;
 
 void		exit_mrt(t_mrt mrt, int status);

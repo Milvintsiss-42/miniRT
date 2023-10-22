@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 08:29:58 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/22 09:11:33 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,48 +137,40 @@ t_intersect	closest_intersection(t_mrt *mrt, t_ray ray,
 	return (intersection);
 }
 
-// See the function compute_lighting for more informations about the variables
-// in the t_point struct.
-t_point	compute_sphere_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
+t_vec3	get_object_normal_at_point(t_l_obj *obj, t_vec3 point_origin, t_ray ray)
 {
-	t_point		point;
-	t_sphere	sphere;
+	t_vec3	normal;
 
-	sphere = *(t_sphere *)(intersect.obj->object);
-	point.p = vec3_sum(ray.origin,
-			vec3_scal_prdct(ray.dir, intersect.closest_t));
-	point.n = vec3_normalize(vec3_diff(point.p, sphere.origin));
-	point.v = vec3_scal_prdct(ray.dir, -1);
-	point.s = sphere.specular;
-	compute_lighting(mrt, &point);
-	sphere.color.x *= point.b.x;
-	sphere.color.y *= point.b.y;
-	sphere.color.z *= point.b.z;
-	point.color = t_vec3_color_to_int(sphere.color);
-	return (point);
+	normal = (t_vec3){0, 0, 0};
+	if (obj->type == SPHERE)
+		normal = vec3_normalize(vec3_diff(point_origin, *get_obj_origin(obj)));
+	else if (obj->type == PLANE)
+	{
+		normal = *get_obj_orientation(obj);
+		if (vec3_dot_prdct(normal, ray.dir) > 0)
+			normal = vec3_scal_prdct(normal, -1);
+	}
+	return (normal);
 }
 
 // See the function compute_lighting for more informations about the variables
 // in the t_point struct.
-t_point	compute_plane_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
+t_point	compute_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
 {
 	t_point	point;
-	t_plane	plane;
+	t_vec3	color;
 
-	plane = *(t_plane *)(intersect.obj->object);
 	point.p = vec3_sum(ray.origin,
 			vec3_scal_prdct(ray.dir, intersect.closest_t));
-			point.n = plane.orientation;
-	point.n = plane.orientation;
-	if (vec3_dot_prdct(point.n, ray.dir) > 0)
-		point.n = vec3_scal_prdct(point.n, -1);
+	point.n = get_object_normal_at_point(intersect.obj, point.p, ray);
 	point.v = vec3_scal_prdct(ray.dir, -1);
-	point.s = plane.specular;
+	point.s = *get_obj_specular(intersect.obj);
 	compute_lighting(mrt, &point);
-	plane.color.x *= point.b.x;
-	plane.color.y *= point.b.y;
-	plane.color.z *= point.b.z;
-	point.color = t_vec3_color_to_int(plane.color);
+	color = *get_obj_color(intersect.obj);
+	color.x *= point.b.x;
+	color.y *= point.b.y;
+	color.z *= point.b.z;
+	point.color = t_vec3_color_to_int(color);
 	return (point);
 }
 
@@ -193,16 +185,8 @@ int	trace_ray(t_mrt *mrt, t_ray ray,
 	clst_intersect = closest_intersection(mrt, ray, t_min, t_max);
 	if (!clst_intersect.obj)
 		return (BACKGROUND_COLOR);
-	if (clst_intersect.obj->type == SPHERE)
-	{
-		point = compute_sphere_point_color(mrt, ray, clst_intersect);
-		reflection = ((t_sphere *)(clst_intersect.obj->object))->reflect;
-	}
-	else if (clst_intersect.obj->type == PLANE)
-	{
-		point = compute_plane_point_color(mrt, ray, clst_intersect);
-		reflection = ((t_plane *)(clst_intersect.obj->object))->reflect;
-	}
+	point = compute_point_color(mrt, ray, clst_intersect);
+	reflection = *get_obj_reflection(clst_intersect.obj);
 	if (clst_intersect.obj->is_selected
 		&& (clst_intersect.obj->type != SPHERE || clst_intersect.is_border))
 		return (RED);

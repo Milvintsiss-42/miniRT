@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:25:57 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 10:49:08 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 02:12:23 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	open_window(t_mrt *mrt, double width_fraction, double height_fraction)
 	reframe(mrt);
 	mlx_key_hook(mrt->mlx.window, on_keypressed, mrt);
 	mlx_mouse_hook(mrt->mlx.window, on_mouse_event, mrt);
-	mlx_hook(mrt->mlx.window, ON_DESTROY, 0, on_cross_clicked, mrt);
+	mlx_hook(mrt->mlx.window, ON_DESTROY, 0, on_window_cross_clicked, mrt);
 	mlx_loop_hook(mrt->mlx.mlx, reframe, mrt);
 	mlx_loop(mrt->mlx.mlx);
 }

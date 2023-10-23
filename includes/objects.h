@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 13:28:13 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 02:04:53 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ bool		l_obj_add_back(t_l_obj **l_obj, void *object, t_obj_type type);
 t_l_obj		*l_obj_last(t_l_obj *l_obj);
 void		free_object_list(t_l_obj *list);
 
-t_l_obj		*select_object_at_screen_coord(t_mrt *mrt, int x, int y);
+t_l_obj		*toggle_select_object_at_screen_coord(t_mrt *mrt, int x, int y);
+void		unselect_all_objects(t_mrt *mrt);
 void		apply_modifier_to_selected_objs(t_mrt *mrt,
 				void (*modifier)(t_mrt *mrt, t_l_obj *obj, int direction),
 				int direction);

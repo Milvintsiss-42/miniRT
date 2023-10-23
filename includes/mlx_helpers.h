@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:47:46 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 13:40:43 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 02:12:23 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define KEY_S			0x0073
 # define KEY_R			0x0072
 # define KEY_T			0x0074
+# define KEY_A			0x0061
 # define KEY_C			0x0063
 # define KEY_D			0x0064
 # define KEY_F			0x0066
@@ -37,6 +38,8 @@
 # define KEY_FLAG_DIAMETER	KEY_D
 # define KEY_FLAG_CAMERA	KEY_C
 # define KEY_FLAG_FOV		KEY_F
+
+# define KEY_UNSELECT_ALL	KEY_A
 
 # define MOUSE_LEFT			1
 # define MOUSE_RIGHT		2
@@ -100,6 +103,6 @@ void		open_window(t_mrt *mrt, double width_fraction,
 
 int			on_keypressed(int keycode, t_mrt *mrt);
 int			on_mouse_event(int button, int x, int y, t_mrt *mrt);
-int			on_cross_clicked(t_mrt *mrt);
+int			on_window_cross_clicked(t_mrt *mrt);
 
 #endif

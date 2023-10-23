@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 02:35:34 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 13:28:29 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 02:04:14 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	on_mouse_event(int button, int x, int y, t_mrt *mrt)
 	if (KDEBUG)
 		ft_printf("Mouse click: %d at %d, %d\n", button, x, y);
 	if (button == MOUSE_LEFT)
-		select_object_at_screen_coord(mrt, x, y);
+		toggle_select_object_at_screen_coord(mrt, x, y);
 	else if (button == MOUSE_SCROLL_UP || button == MOUSE_SCROLL_DOWN)
 		on_mouse_scroll(mrt, 1 - 2 * (button == MOUSE_SCROLL_DOWN), x, y);
 	return (0);

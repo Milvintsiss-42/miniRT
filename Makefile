@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/10/22 11:42:16 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/10/23 02:11:56 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,9 @@ SRCS		= $(addsuffix .c, \
 	$(addprefix mlx_helpers/, \
 		basic_mlx_helpers \
 		open_window \
-		events \
+		key_events \
 		mouse_events \
+		special_events \
 	) \
 	$(addprefix object_helpers/, \
 		camera_helpers \

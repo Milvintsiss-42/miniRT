@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 03:20:56 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 05:42:31 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_sphere	sphere_from_light(t_light light)
 
 	sphere.origin = light.origin_o_dir;
 	sphere.diameter = 0.5;
-	sphere.color = light.color;
+	sphere.color = int_color_to_t_vec3(WHITE);
 	sphere.specular = -1;
 	sphere.reflect = 0.0;
 	return (sphere);
@@ -198,6 +198,8 @@ t_point	compute_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
 		point.s = -1;
 	compute_lighting(mrt, &point);
 	color = *get_obj_color(intersect.obj);
+	if (intersect.obj->type == SPOT_LIGHT)
+		color = int_color_to_t_vec3(WHITE);
 	color.x *= point.b.x;
 	color.y *= point.b.y;
 	color.z *= point.b.z;

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 11:34:30 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 13:42:30 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 03:29:15 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	resize_object(t_mrt *mrt, t_l_obj *obj, int direction)
 	{
 		((t_light *)obj->object)->brightness
 			+= direction * LIGHT_INTENSITY_SPEED;
-		ft_max_d(0.0, ft_min_d(((t_light *)obj->object)->brightness, 1.0));
+		((t_light *)obj->object)->brightness = ft_max_d(
+				0.0, ft_min_d(((t_light *)obj->object)->brightness, 1.0));
 	}
 }
 

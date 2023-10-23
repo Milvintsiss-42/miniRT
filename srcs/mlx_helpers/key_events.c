@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 15:18:27 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 02:19:27 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 02:40:40 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static bool	key_flag(t_mrt *mrt, int key)
 		ft_toggleflag(&mrt->event_mode.flags, FLAG_HEIGHT);
 	else if (key == KEY_FLAG_DIAMETER)
 		ft_toggleflag(&mrt->event_mode.flags, FLAG_DIAMETER);
+	else if (key == KEY_FLAG_LIGHT_V)
+		ft_toggleflag(&mrt->event_mode.flags, FLAG_LIGHT_V);
 	else
 		return (false);
 	return (true);

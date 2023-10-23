@@ -6,12 +6,24 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 09:11:33 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 03:20:56 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 #include "mlx_helpers.h"
+
+t_sphere	sphere_from_light(t_light light)
+{
+	t_sphere	sphere;
+
+	sphere.origin = light.origin_o_dir;
+	sphere.diameter = 0.5;
+	sphere.color = light.color;
+	sphere.specular = -1;
+	sphere.reflect = 0.0;
+	return (sphere);
+}
 
 /// @brief Converts a pixel coordinate on the canvas to a viewport coordinate.
 /// @param mrt
@@ -78,8 +90,13 @@ void	closest_intersection_sphere(t_mrt *mrt, t_intersect *intersection,
 	t_ray ray, t_l_obj *cur_sphere, double t_min, double t_max)
 {
 	t_quadratic	q;
+	t_sphere	sphere;
 
-	q = intersect_ray_sphere(ray, *(t_sphere *)(cur_sphere->object));
+	if (cur_sphere->type == SPOT_LIGHT)
+		sphere = sphere_from_light(*(t_light *)(cur_sphere->object));
+	else
+		sphere = *(t_sphere *)(cur_sphere->object);
+	q = intersect_ray_sphere(ray, sphere);
 	if (q.t1 >= t_min && q.t1 <= t_max && q.t1 < intersection->closest_t)
 		intersection->closest_t = q.t1;
 	if (q.t2 >= t_min && q.t2 <= t_max && q.t2 < intersection->closest_t)
@@ -89,7 +106,7 @@ void	closest_intersection_sphere(t_mrt *mrt, t_intersect *intersection,
 		intersection->obj = cur_sphere;
 		intersection->is_border = fabs(q.t1 - q.t2)
 			< (((double)mrt->scene.camera.fov / 180)
-				* sqrt(((t_sphere *)(cur_sphere->object))->diameter)) / 2;
+				* sqrt(sphere.diameter)) / 2;
 	}
 }
 
@@ -134,6 +151,17 @@ t_intersect	closest_intersection(t_mrt *mrt, t_ray ray,
 				t_min, t_max);
 		obj_iter = obj_iter->next;
 	}
+	if (ft_checkflag(mrt->event_mode.flags, FLAG_LIGHT_V))
+	{
+		obj_iter = mrt->scene.lights;
+		while (obj_iter)
+		{
+			if (obj_iter->type == SPOT_LIGHT)
+				closest_intersection_sphere(mrt, &intersection, ray, obj_iter,
+					t_min, t_max);
+			obj_iter = obj_iter->next;
+		}
+	}
 	return (intersection);
 }
 
@@ -142,7 +170,7 @@ t_vec3	get_object_normal_at_point(t_l_obj *obj, t_vec3 point_origin, t_ray ray)
 	t_vec3	normal;
 
 	normal = (t_vec3){0, 0, 0};
-	if (obj->type == SPHERE)
+	if (obj->type == SPHERE || obj->type == SPOT_LIGHT)
 		normal = vec3_normalize(vec3_diff(point_origin, *get_obj_origin(obj)));
 	else if (obj->type == PLANE)
 	{
@@ -164,7 +192,10 @@ t_point	compute_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
 			vec3_scal_prdct(ray.dir, intersect.closest_t));
 	point.n = get_object_normal_at_point(intersect.obj, point.p, ray);
 	point.v = vec3_scal_prdct(ray.dir, -1);
-	point.s = *get_obj_specular(intersect.obj);
+	if (intersect.obj->type != SPOT_LIGHT)
+		point.s = *get_obj_specular(intersect.obj);
+	else
+		point.s = -1;
 	compute_lighting(mrt, &point);
 	color = *get_obj_color(intersect.obj);
 	color.x *= point.b.x;
@@ -186,9 +217,13 @@ int	trace_ray(t_mrt *mrt, t_ray ray,
 	if (!clst_intersect.obj)
 		return (BACKGROUND_COLOR);
 	point = compute_point_color(mrt, ray, clst_intersect);
-	reflection = *get_obj_reflection(clst_intersect.obj);
+	if (clst_intersect.obj->type != SPOT_LIGHT)
+		reflection = *get_obj_reflection(clst_intersect.obj);
+	else
+		reflection = 0.0;
 	if (clst_intersect.obj->is_selected
-		&& (clst_intersect.obj->type != SPHERE || clst_intersect.is_border))
+		&& (clst_intersect.is_border || (clst_intersect.obj->type != SPHERE
+				&& clst_intersect.obj->type != SPOT_LIGHT)))
 		return (RED);
 	if (reflect_rec_depth <= 0 || reflection <= 0.0)
 		return (point.color);

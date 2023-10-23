@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:20:54 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 05:55:29 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 03:09:26 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,18 @@ static bool	is_in_shadow(t_mrt *mrt, t_point p, t_l_obj light)
 {
 	t_intersect	clst_inter;
 	double		t_max;
+	bool		is_flag_light_v_active;
 
 	t_max = 0.0;
 	if (light.type == SPOT_LIGHT)
 		t_max = 1.0;
 	else if (light.type == DIR_LIGHT)
 		t_max = __DBL_MAX__;
+	is_flag_light_v_active = ft_checkflag(mrt->event_mode.flags, FLAG_LIGHT_V);
+	ft_resetflag(&mrt->event_mode.flags, FLAG_LIGHT_V);
 	clst_inter = closest_intersection(mrt, (t_ray){p.p, p.l}, LOW_DBL, t_max);
+	if (is_flag_light_v_active)
+		ft_setflag(&mrt->event_mode.flags, FLAG_LIGHT_V);
 	return (clst_inter.obj != NULL);
 }
 

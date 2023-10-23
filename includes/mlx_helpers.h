@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:47:46 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 02:12:23 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 03:32:22 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define KEY_D			0x0064
 # define KEY_F			0x0066
 # define KEY_H			0x0068
+# define KEY_L			0x006c
 
 # define KEY_MODE_RESIZE	KEY_S
 # define KEY_MODE_ROTATE	KEY_R
@@ -38,6 +39,7 @@
 # define KEY_FLAG_DIAMETER	KEY_D
 # define KEY_FLAG_CAMERA	KEY_C
 # define KEY_FLAG_FOV		KEY_F
+# define KEY_FLAG_LIGHT_V	KEY_L
 
 # define KEY_UNSELECT_ALL	KEY_A
 
@@ -78,6 +80,7 @@ typedef enum e_axis
 # define FLAG_HEIGHT	0b00000010
 # define FLAG_CAMERA	0b00000100
 # define FLAG_FOV_ZOOM	0b00001000
+# define FLAG_LIGHT_V	0b00010000
 
 typedef struct s_event_mode
 {

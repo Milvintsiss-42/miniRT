@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 05:42:31 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/23 07:42:47 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ t_vec3	reflect_ray(t_vec3 ray, t_vec3 normal)
 /// @return Returns the distance between the origin of the ray and the
 /// intersections.
 /// Returns a t_quadratic struct containing the solved equation, t1 and t2 are
-/// the distances of each intersection.
+/// the distances of each intersection, t2 is the point where the ray enters the
+/// sphere, t1 is the point where the ray exits the sphere.
 /// If there is only one intersection, t1 and t2 are equal.
 /// If there is no intersection, t1 and t2 are set to 1.0 / 0.0.
 t_quadratic	intersect_ray_sphere(t_ray ray, t_sphere sphere)
@@ -104,6 +105,7 @@ void	closest_intersection_sphere(t_mrt *mrt, t_intersect *intersection,
 	if (intersection->closest_t == q.t1 || intersection->closest_t == q.t2)
 	{
 		intersection->obj = cur_sphere;
+		intersection->is_inside = (intersection->closest_t == q.t1);
 		intersection->is_border = fabs(q.t1 - q.t2)
 			< (((double)mrt->scene.camera.fov / 180)
 				* sqrt(sphere.diameter)) / 2;
@@ -127,6 +129,7 @@ void	closest_intersection_plane(t_mrt *mrt, t_intersect *intersection,
 	{
 		intersection->closest_t = t;
 		intersection->obj = cur_plane;
+		intersection->is_inside = false;
 		intersection->is_border = false;
 	}
 }
@@ -165,19 +168,23 @@ t_intersect	closest_intersection(t_mrt *mrt, t_ray ray,
 	return (intersection);
 }
 
-t_vec3	get_object_normal_at_point(t_l_obj *obj, t_vec3 point_origin, t_ray ray)
+t_vec3	get_object_normal_at_point(t_ray ray, t_intersect intersect,
+	t_vec3 point_origin)
 {
 	t_vec3	normal;
 
 	normal = (t_vec3){0, 0, 0};
-	if (obj->type == SPHERE || obj->type == SPOT_LIGHT)
-		normal = vec3_normalize(vec3_diff(point_origin, *get_obj_origin(obj)));
-	else if (obj->type == PLANE)
+	if (intersect.obj->type == SPHERE || intersect.obj->type == SPOT_LIGHT)
+		normal = vec3_normalize(
+				vec3_diff(point_origin, *get_obj_origin(intersect.obj)));
+	else if (intersect.obj->type == PLANE)
 	{
-		normal = *get_obj_orientation(obj);
+		normal = *get_obj_orientation(intersect.obj);
 		if (vec3_dot_prdct(normal, ray.dir) > 0)
 			normal = vec3_scal_prdct(normal, -1);
 	}
+	if (intersect.is_inside)
+		normal = vec3_scal_prdct(normal, -1);
 	return (normal);
 }
 
@@ -190,7 +197,7 @@ t_point	compute_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
 
 	point.p = vec3_sum(ray.origin,
 			vec3_scal_prdct(ray.dir, intersect.closest_t));
-	point.n = get_object_normal_at_point(intersect.obj, point.p, ray);
+	point.n = get_object_normal_at_point(ray, intersect, point.p);
 	point.v = vec3_scal_prdct(ray.dir, -1);
 	if (intersect.obj->type != SPOT_LIGHT)
 		point.s = *get_obj_specular(intersect.obj);

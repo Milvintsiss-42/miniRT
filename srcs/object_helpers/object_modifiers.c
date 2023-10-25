@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 11:34:30 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 03:29:15 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:02:44 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,11 @@ void	rotate_object(t_mrt *mrt, t_l_obj *obj, int direction)
 			direction * ROTATE_SPEED * (mrt->event_mode.axis == X),
 			direction * ROTATE_SPEED * (mrt->event_mode.axis == Y),
 			direction * ROTATE_SPEED * (mrt->event_mode.axis == Z));
+}
+
+void	update_amb_light_intensity(t_mrt *mrt, int direction)
+{
+	mrt->scene.amb_light.brightness += direction * LIGHT_INTENSITY_SPEED;
+	mrt->scene.amb_light.brightness = ft_max_d(
+			0.0, ft_min_d(mrt->scene.amb_light.brightness, 1.0));
 }

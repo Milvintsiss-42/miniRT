@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:47:46 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 03:32:22 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:56:28 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 # define MLX_HELPERS_H
 
 # define KEY_ECHAP		0xff1b
-# define KEY_X			0x0078
-# define KEY_Y			0x0079
-# define KEY_Z			0x007a
 # define KEY_ARROW_L	0xff51
 # define KEY_ARROW_R	0xff53
 # define KEY_ARROW_T	0xff52
 # define KEY_ARROW_D	0xff54
-# define KEY_S			0x0073
-# define KEY_R			0x0072
-# define KEY_T			0x0074
+# define KEY_SPACE		0x0020
 # define KEY_A			0x0061
 # define KEY_C			0x0063
 # define KEY_D			0x0064
 # define KEY_F			0x0066
 # define KEY_H			0x0068
 # define KEY_L			0x006c
+# define KEY_R			0x0072
+# define KEY_S			0x0073
+# define KEY_T			0x0074
+# define KEY_X			0x0078
+# define KEY_Y			0x0079
+# define KEY_Z			0x007a
 
 # define KEY_MODE_RESIZE	KEY_S
 # define KEY_MODE_ROTATE	KEY_R
@@ -40,8 +41,9 @@
 # define KEY_FLAG_CAMERA	KEY_C
 # define KEY_FLAG_FOV		KEY_F
 # define KEY_FLAG_LIGHT_V	KEY_L
+# define KEY_FLAG_AMB_LIGHT	KEY_A
 
-# define KEY_UNSELECT_ALL	KEY_A
+# define KEY_UNSELECT_ALL	KEY_SPACE
 
 # define MOUSE_LEFT			1
 # define MOUSE_RIGHT		2
@@ -81,6 +83,7 @@ typedef enum e_axis
 # define FLAG_CAMERA	0b00000100
 # define FLAG_FOV_ZOOM	0b00001000
 # define FLAG_LIGHT_V	0b00010000
+# define FLAG_AMB_LIGHT	0b00100000
 
 typedef struct s_event_mode
 {

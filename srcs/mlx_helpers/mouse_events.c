@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 02:35:34 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 02:04:14 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:03:29 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static void	apply_modifiers_to_camera(t_mrt *mrt, int direction, int x, int y)
 
 static void	on_mouse_scroll(t_mrt *mrt, int direction, int x, int y)
 {
-	if (ft_checkflag(mrt->event_mode.flags, FLAG_CAMERA))
+	if (ft_checkflag(mrt->event_mode.flags, FLAG_AMB_LIGHT))
+		update_amb_light_intensity(mrt, direction);
+	else if (ft_checkflag(mrt->event_mode.flags, FLAG_CAMERA))
 		apply_modifiers_to_camera(mrt, direction, x, y);
 	else
 		apply_modifiers_to_objs(mrt, direction);

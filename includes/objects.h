@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 02:04:53 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:03:11 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ double		*get_obj_reflection(t_l_obj *obj);
 void		translate_object(t_mrt *mrt, t_l_obj *obj, int direction);
 void		resize_object(t_mrt *mrt, t_l_obj *obj, int direction);
 void		rotate_object(t_mrt *mrt, t_l_obj *obj, int direction);
+void		update_amb_light_intensity(t_mrt *mrt, int direction);
 
 void		rotate_camera(t_mrt *mrt, double yaw, double pitch, double roll);
 void		translate_camera(t_mrt *mrt, t_axis axis, int direction);

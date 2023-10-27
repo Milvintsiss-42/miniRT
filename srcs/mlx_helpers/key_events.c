@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 15:18:27 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/25 11:57:41 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:31:31 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static bool	key_flag(t_mrt *mrt, int key)
 		ft_toggleflag(&mrt->event_mode.flags, FLAG_LIGHT_V);
 	else if (key == KEY_FLAG_AMB_LIGHT)
 		ft_toggleflag(&mrt->event_mode.flags, FLAG_AMB_LIGHT);
+	else if (key == KEY_FLAG_REFLECT)
+		ft_toggleflag(&mrt->event_mode.flags, FLAG_REFLECT);
 	else
 		return (false);
 	return (true);

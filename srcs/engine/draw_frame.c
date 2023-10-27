@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 07:42:47 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:33:03 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,10 @@ void	draw_frame(t_mrt *mrt)
 	int		y;
 	t_vec3	ray_dir;
 	int		color;
+	int		reflect_rec_depth;
 
+	reflect_rec_depth = REFLECT_REC_DEPTH
+		* ft_checkflag(mrt->event_mode.flags, FLAG_REFLECT);
 	set_viewport_dimensions(mrt);
 	x = 0;
 	while (x < mrt->mlx.win_width)
@@ -290,7 +293,7 @@ void	draw_frame(t_mrt *mrt)
 		{
 			ray_dir = get_ray_direction(mrt, x, y);
 			color = trace_ray(mrt, (t_ray){mrt->scene.camera.origin, ray_dir},
-					1.0, __DBL_MAX__, REFLECT_REC_DEPTH);
+					1.0, __DBL_MAX__, reflect_rec_depth);
 			put_pixel_on_img(mrt, x, y, color);
 			y++;
 		}

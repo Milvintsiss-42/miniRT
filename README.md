@@ -13,8 +13,9 @@
 | `X`, `Y`, `Z` | Selects the corresponding axis.<br />[Defaults to `X`]       |
 | `L`           | Makes spot lights visible (represented by a small white sphere), you can only select lights when they are visible. |
 | `SPACE`       | Unselects all objects and lights.                            |
+| `M`           | Enables/disables reflection for all objects.                 |
 | `F`           | Toggles FOV flag. When this flag is active, `RESIZE` action in camera mode will modify the camera FOV value, instead of triggering a zoom/dezoom.<br />[Defaults to `OF`] |
 | `H`           | Toggles HEIGHT flag. When this flag is active, `RESIZE` action will modify the height of selected objects that have a height property.<br />This flag is additionable with DIAMETER flag.<br />[Defaults to `ON`] |
 | `D`           | Toggles DIAMETER flag. When this flag is active, `RESIZE` action will modify the diameter of selected objects that have a diameter property.<br />This flag is additionable with HEIGHT flag.<br />This flag does not apply to spheres.<br />[Defaults to `OF`] |
-| `A`           | Toggles AMB_LIGHT flag. When this flag is active, interactions will only apply to the ambiant light. So if a mouse scroll event occurs, it will increment/decrement the brightness of the ambiant light.<br />[Default to `OF`] |
+| `A`           | Toggles AMB_LIGHT flag. When this flag is active, interactions will only apply to the ambiant light. So if a mouse scroll event occurs, it will increment/decrement the brightness of the ambiant light.<br />[Defaults to `OF`] |
 

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 00:24:59 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:50:46 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,6 @@ t_sphere	sphere_from_light(t_light light)
 	sphere.reflect = 0.0;
 	precompute_sphere_basics(&sphere);
 	return (sphere);
-}
-
-/// @brief Converts a pixel coordinate on the canvas to a viewport coordinate.
-/// @param mrt
-/// @param x
-/// @param y
-/// @return Returns a t_vec3 containing the viewport coordinates.
-t_vec3	canvas_to_viewport(t_mrt *mrt, int x, int y)
-{
-	t_vec3	vp;
-
-	x -= mrt->mlx.win_width / 2;
-	y = mrt->mlx.win_height / 2 - y;
-	vp.x = x * mrt->scene.viewport.w / mrt->mlx.win_width;
-	vp.y = y * mrt->scene.viewport.h / mrt->mlx.win_height;
-	vp.z = mrt->scene.viewport.dist;
-	return (vp);
 }
 
 // See the function compute_lighting for more informations about the variables
@@ -96,26 +79,6 @@ int	trace_ray(t_mrt *mrt, t_ray ray, int reflect_rec_depth)
 			__DBL_MAX__},
 			reflect_rec_depth - 1);
 	return (blend_colors(point.color, reflected_color, 1 - reflection));
-}
-
-static void	set_viewport_dimensions(t_mrt *mrt)
-{
-	mrt->scene.viewport.w = 1.0;
-	mrt->scene.viewport.h = 1.0;
-	if (mrt->mlx.win_width >= mrt->mlx.win_height)
-	{
-		mrt->scene.viewport.w
-			= mrt->scene.viewport.w * mrt->mlx.win_width / mrt->mlx.win_height;
-		mrt->scene.viewport.dist = (mrt->scene.viewport.w / 2.0)
-			/ tan(deg_to_rad(mrt->scene.camera.fov / 2.0));
-	}
-	else
-	{
-		mrt->scene.viewport.h
-			= mrt->scene.viewport.h * mrt->mlx.win_height / mrt->mlx.win_width;
-		mrt->scene.viewport.dist = (mrt->scene.viewport.h / 2.0)
-			/ tan(deg_to_rad(mrt->scene.camera.fov / 2.0));
-	}
 }
 
 void	draw_frame(t_mrt *mrt)

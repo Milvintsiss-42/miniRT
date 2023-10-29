@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:27:56 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 08:40:16 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:38:30 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,14 @@ int	blend_colors(int color1, int color2, double ratio)
 	r.y = c1.y * ratio + c2.y * (1 - ratio);
 	r.z = c1.z * ratio + c2.z * (1 - ratio);
 	return (t_vec3_color_to_int(r));
+}
+
+t_vec3	brightness_color_wise(double brightness, t_vec3 color)
+{
+	t_vec3	ret;
+
+	ret.x = (color.x / 255) * brightness;
+	ret.y = (color.y / 255) * brightness;
+	ret.z = (color.z / 255) * brightness;
+	return (ret);
 }

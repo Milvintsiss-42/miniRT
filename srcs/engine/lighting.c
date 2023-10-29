@@ -6,21 +6,11 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:20:54 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 21:59:23 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:38:23 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
-
-static t_vec3	brightness_color_wise(double brightness, t_vec3 color)
-{
-	t_vec3	ret;
-
-	ret.x = (color.x / 255) * brightness;
-	ret.y = (color.y / 255) * brightness;
-	ret.z = (color.z / 255) * brightness;
-	return (ret);
-}
 
 static t_vec3	light_direction(t_obj_type light_type, t_light light, t_point p)
 {

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 22:33:35 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:38:38 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,16 @@ t_vec3		reflect_ray(t_vec3 ray, t_vec3 normal);
 void		draw_test_card_f(t_mrt *mrt);
 
 void		compute_lighting(t_mrt *mrt, t_point *p);
-int			t_vec3_color_to_int(t_vec3 color);
-t_vec3		int_color_to_t_vec3(int color);
-int			blend_colors(int color1, int color2, double ratio);
 
 t_sphere	sphere_from_light(t_light light);
 
 // ---engine_helpers---
 void		precompute_basics(t_mrt	*mrt);
+// color_helpers
+int			t_vec3_color_to_int(t_vec3 color);
+t_vec3		int_color_to_t_vec3(int color);
+int			blend_colors(int color1, int color2, double ratio);
+t_vec3		brightness_color_wise(double brightness, t_vec3 color);
 // objects normals
 t_vec3		get_object_normal_at_point(t_vec3 point, t_ray ray,
 				t_intersect intersect);

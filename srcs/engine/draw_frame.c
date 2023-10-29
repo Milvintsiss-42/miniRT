@@ -22,6 +22,7 @@ t_sphere	sphere_from_light(t_light light)
 	sphere.color = int_color_to_t_vec3(WHITE);
 	sphere.specular = -1;
 	sphere.reflect = 0.0;
+	precompute_sphere_basics(&sphere);
 	return (sphere);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 00:26:47 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:27:18 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void		compute_lighting(t_mrt *mrt, t_point *p);
 t_sphere	sphere_from_light(t_light light);
 
 // ---engine_helpers---
-void		precompute_basics(t_mrt	*mrt);
 // color_helpers
 int			t_vec3_color_to_int(t_vec3 color);
 t_vec3		int_color_to_t_vec3(int color);
@@ -96,6 +95,10 @@ t_vec3		get_object_normal_at_point(t_vec3 point, t_ray ray,
 t_vec3		get_sphere_normal_at_point(t_vec3 point, t_sphere sphere);
 t_vec3		get_plane_normal_at_point(t_ray ray, t_plane plane);
 t_vec3		get_cylinder_normal_at_point(t_vec3 point, t_cylinder cyl);
+// precompute
+void		precompute_basics(t_mrt	*mrt);
+void		precompute_sphere_basics(t_sphere *sphere);
+void		precompute_cylinder_basics(t_cylinder *cylinder);
 // ray
 t_vec3		get_camera_ray_direction(t_mrt *mrt, int x, int y);
 t_vec3		reflect_ray(t_vec3 ray, t_vec3 normal);

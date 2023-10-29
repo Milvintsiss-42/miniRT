@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/23 07:23:05 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 21:57:27 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,21 @@ typedef struct s_ray
 {
 	t_vec3	origin;
 	t_vec3	dir;
+	double	t_min;
+	double	t_max;
 }	t_ray;
+
+typedef struct s_tdisk
+{
+	double	top;
+	double	bottom;
+}	t_tdisk;
 
 typedef struct s_mrt	t_mrt;
 
 void		draw_frame(t_mrt *mrt);
 t_vec3		canvas_to_viewport(t_mrt *mrt, int x, int y);
 t_vec3		get_ray_direction(t_mrt *mrt, int x, int y);
-t_intersect	closest_intersection(t_mrt *mrt, t_ray ray,
-				double t_min, double t_max);
 t_vec3		reflect_ray(t_vec3 ray, t_vec3 normal);
 void		draw_test_card_f(t_mrt *mrt);
 
@@ -79,5 +85,36 @@ void		compute_lighting(t_mrt *mrt, t_point *p);
 int			t_vec3_color_to_int(t_vec3 color);
 t_vec3		int_color_to_t_vec3(int color);
 int			blend_colors(int color1, int color2, double ratio);
+
+t_sphere	sphere_from_light(t_light light);
+
+// Intersections
+t_intersect	closest_intersection(t_mrt *mrt, t_ray ray);
+
+void		closest_intersection_sphere(t_mrt *mrt, t_intersect *intersection,
+				t_ray ray, t_l_obj *cur_sphere);
+t_quadratic	ray_sphere_intersections(t_ray ray, t_sphere sphere);
+
+void		closest_intersection_plane(t_intersect *intersection,
+				t_ray ray, t_l_obj *cur_plane);
+double		ray_plane_intersection(t_ray ray, t_plane plane);
+
+void		closest_intersection_cylinder(t_mrt *mrt, t_intersect *intersection,
+				t_ray ray, t_l_obj *cur_cylinder);
+double		ray_disk_intersection(t_ray ray, t_vec3 origin, t_vec3 orientation,
+				double pow2_radius);
+t_quadratic	ray_cylinder_tube_intersections(t_ray ray, t_cylinder cylinder);
+void		register_cylinder_tube_intersection(t_mrt *mrt,
+				t_intersect *intersection, t_l_obj *cur_cylinder,
+				t_quadratic solv_q);
+void		register_cylinder_disk_intersection(t_intersect *intersection,
+				t_l_obj *cur_cylinder, t_ray ray, t_tdisk tdisk);
+
+// Objects normals
+t_vec3		get_object_normal_at_point(t_vec3 point, t_ray ray,
+				t_intersect intersect);
+t_vec3		get_sphere_normal_at_point(t_vec3 point, t_sphere sphere);
+t_vec3		get_plane_normal_at_point(t_ray ray, t_plane plane);
+t_vec3		get_cylinder_normal_at_point(t_vec3 point, t_cylinder cyl);
 
 #endif

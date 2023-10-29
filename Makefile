@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/10/23 02:11:56 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/10/29 19:40:57 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,17 @@ SRCS		= $(addsuffix .c, \
 		print_progress \
 	) \
 	$(addprefix engine/, \
+		$(addprefix engine_helpers/, \
+			cylinder_normal \
+			object_normal \
+		) \
+		$(addprefix intersections/, \
+			intersections_cylinder_register \
+			intersections_cylinder \
+			intersections_plane \
+			intersections_sphere \
+			intersections \
+		) \
 		draw_frame \
 		draw_test_card_f \
 		lighting \
@@ -59,6 +70,7 @@ SRCS		= $(addsuffix .c, \
 	$(addprefix math_helpers/, \
 		angle_helpers \
 		matrix_helpers \
+		quadratic \
 		vec3_basics \
 		vec3_products \
 	) \

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/27 16:33:03 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 21:58:40 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,138 +56,6 @@ t_vec3	reflect_ray(t_vec3 ray, t_vec3 normal)
 			ray));
 }
 
-/// @brief Computes the intersections between a ray and a sphere.
-/// @param ray The ray along which to compute the intersections.
-/// @param sphere The sphere to intersect with.
-/// @return Returns the distance between the origin of the ray and the
-/// intersections.
-/// Returns a t_quadratic struct containing the solved equation, t1 and t2 are
-/// the distances of each intersection, t2 is the point where the ray enters the
-/// sphere, t1 is the point where the ray exits the sphere.
-/// If there is only one intersection, t1 and t2 are equal.
-/// If there is no intersection, t1 and t2 are set to 1.0 / 0.0.
-t_quadratic	intersect_ray_sphere(t_ray ray, t_sphere sphere)
-{
-	t_quadratic	s;
-	t_vec3		co;
-
-	co = vec3_diff(ray.origin, sphere.origin);
-	s.a = vec3_dot_prdct(ray.dir, ray.dir);
-	s.b = 2 * vec3_dot_prdct(co, ray.dir);
-	s.c = vec3_dot_prdct(co, co)
-		- (sphere.diameter / 2) * (sphere.diameter / 2);
-	s.discriminant = s.b * s.b - 4 * s.a * s.c;
-	s.t1 = 1.0 / 0.0;
-	s.t2 = 1.0 / 0.0;
-	if (s.discriminant >= 0)
-	{
-		s.t1 = (-s.b + sqrt(s.discriminant)) / (2 * s.a);
-		s.t2 = (-s.b - sqrt(s.discriminant)) / (2 * s.a);
-	}
-	return (s);
-}
-
-void	closest_intersection_sphere(t_mrt *mrt, t_intersect *intersection,
-	t_ray ray, t_l_obj *cur_sphere, double t_min, double t_max)
-{
-	t_quadratic	q;
-	t_sphere	sphere;
-
-	if (cur_sphere->type == SPOT_LIGHT)
-		sphere = sphere_from_light(*(t_light *)(cur_sphere->object));
-	else
-		sphere = *(t_sphere *)(cur_sphere->object);
-	q = intersect_ray_sphere(ray, sphere);
-	if (q.t1 >= t_min && q.t1 <= t_max && q.t1 < intersection->closest_t)
-		intersection->closest_t = q.t1;
-	if (q.t2 >= t_min && q.t2 <= t_max && q.t2 < intersection->closest_t)
-		intersection->closest_t = q.t2;
-	if (intersection->closest_t == q.t1 || intersection->closest_t == q.t2)
-	{
-		intersection->obj = cur_sphere;
-		intersection->is_inside = (intersection->closest_t == q.t1);
-		intersection->is_border = fabs(q.t1 - q.t2)
-			< (((double)mrt->scene.camera.fov / 180)
-				* sqrt(sphere.diameter)) / 2;
-	}
-}
-
-void	closest_intersection_plane(t_mrt *mrt, t_intersect *intersection,
-	t_ray ray, t_l_obj *cur_plane, double t_min, double t_max)
-{
-	t_plane		plane;
-	double		denom;
-	double		t;
-
-	plane = *(t_plane *)(cur_plane->object);
-	denom = vec3_dot_prdct(ray.dir, plane.orientation);
-	if (fabs(denom) < LOW_DBL)
-		return ;
-	t = vec3_dot_prdct(vec3_diff(plane.origin, ray.origin), plane.orientation)
-		/ denom;
-	if (t >= t_min && t <= t_max && t < intersection->closest_t)
-	{
-		intersection->closest_t = t;
-		intersection->obj = cur_plane;
-		intersection->is_inside = false;
-		intersection->is_border = false;
-	}
-}
-
-t_intersect	closest_intersection(t_mrt *mrt, t_ray ray,
-	double t_min, double t_max)
-{
-	t_intersect	intersection;
-	t_l_obj		*obj_iter;
-
-	intersection.closest_t = __DBL_MAX__;
-	intersection.obj = NULL;
-	intersection.is_border = false;
-	obj_iter = mrt->scene.objects;
-	while (obj_iter)
-	{
-		if (obj_iter->type == SPHERE)
-			closest_intersection_sphere(mrt, &intersection, ray, obj_iter,
-				t_min, t_max);
-		else if (obj_iter->type == PLANE)
-			closest_intersection_plane(mrt, &intersection, ray, obj_iter,
-				t_min, t_max);
-		obj_iter = obj_iter->next;
-	}
-	if (ft_checkflag(mrt->event_mode.flags, FLAG_LIGHT_V))
-	{
-		obj_iter = mrt->scene.lights;
-		while (obj_iter)
-		{
-			if (obj_iter->type == SPOT_LIGHT)
-				closest_intersection_sphere(mrt, &intersection, ray, obj_iter,
-					t_min, t_max);
-			obj_iter = obj_iter->next;
-		}
-	}
-	return (intersection);
-}
-
-t_vec3	get_object_normal_at_point(t_ray ray, t_intersect intersect,
-	t_vec3 point_origin)
-{
-	t_vec3	normal;
-
-	normal = (t_vec3){0, 0, 0};
-	if (intersect.obj->type == SPHERE || intersect.obj->type == SPOT_LIGHT)
-		normal = vec3_normalize(
-				vec3_diff(point_origin, *get_obj_origin(intersect.obj)));
-	else if (intersect.obj->type == PLANE)
-	{
-		normal = *get_obj_orientation(intersect.obj);
-		if (vec3_dot_prdct(normal, ray.dir) > 0)
-			normal = vec3_scal_prdct(normal, -1);
-	}
-	if (intersect.is_inside)
-		normal = vec3_scal_prdct(normal, -1);
-	return (normal);
-}
-
 // See the function compute_lighting for more informations about the variables
 // in the t_point struct.
 t_point	compute_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
@@ -197,7 +65,7 @@ t_point	compute_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
 
 	point.p = vec3_sum(ray.origin,
 			vec3_scal_prdct(ray.dir, intersect.closest_t));
-	point.n = get_object_normal_at_point(ray, intersect, point.p);
+	point.n = get_object_normal_at_point(point.p, ray, intersect);
 	point.v = vec3_scal_prdct(ray.dir, -1);
 	if (intersect.obj->type != SPOT_LIGHT)
 		point.s = *get_obj_specular(intersect.obj);
@@ -214,15 +82,14 @@ t_point	compute_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
 	return (point);
 }
 
-int	trace_ray(t_mrt *mrt, t_ray ray,
-	double t_min, double t_max, int reflect_rec_depth)
+int	trace_ray(t_mrt *mrt, t_ray ray, int reflect_rec_depth)
 {
 	t_intersect	clst_intersect;
 	t_point		point;
 	int			reflected_color;
 	double		reflection;
 
-	clst_intersect = closest_intersection(mrt, ray, t_min, t_max);
+	clst_intersect = closest_intersection(mrt, ray);
 	if (!clst_intersect.obj)
 		return (BACKGROUND_COLOR);
 	point = compute_point_color(mrt, ray, clst_intersect);
@@ -232,13 +99,15 @@ int	trace_ray(t_mrt *mrt, t_ray ray,
 		reflection = 0.0;
 	if (clst_intersect.obj->is_selected
 		&& (clst_intersect.is_border || (clst_intersect.obj->type != SPHERE
+				&& clst_intersect.obj->type != CYLINDER
 				&& clst_intersect.obj->type != SPOT_LIGHT)))
 		return (RED);
 	if (reflect_rec_depth <= 0 || reflection <= 0.0)
 		return (point.color);
 	reflected_color = trace_ray(mrt,
-			(t_ray){point.p, reflect_ray(point.v, point.n)},
-			LOW_DBL, __DBL_MAX__, reflect_rec_depth - 1);
+			(t_ray){point.p, reflect_ray(point.v, point.n), LOW_DBL,
+			__DBL_MAX__},
+			reflect_rec_depth - 1);
 	return (blend_colors(point.color, reflected_color, 1 - reflection));
 }
 
@@ -274,6 +143,26 @@ static void	set_viewport_dimensions(t_mrt *mrt)
 	}
 }
 
+void	precompute_cylinder_basics(t_cylinder *cylinder)
+{
+	cylinder->p_top_origin = vec3_sum(cylinder->origin,
+			vec3_scal_prdct(cylinder->orientation, cylinder->height));
+	cylinder->p_pow2_radius = pow(cylinder->diameter / 2, 2);
+}
+
+void	precompute_basics(t_mrt	*mrt)
+{
+	t_l_obj	*obj_iter;
+
+	obj_iter = mrt->scene.objects;
+	while (obj_iter)
+	{
+		if (obj_iter->type == CYLINDER)
+			precompute_cylinder_basics(obj_iter->object);
+		obj_iter = obj_iter->next;
+	}
+}
+
 void	draw_frame(t_mrt *mrt)
 {
 	int		x;
@@ -285,6 +174,7 @@ void	draw_frame(t_mrt *mrt)
 	reflect_rec_depth = REFLECT_REC_DEPTH
 		* ft_checkflag(mrt->event_mode.flags, FLAG_REFLECT);
 	set_viewport_dimensions(mrt);
+	precompute_basics(mrt);
 	x = 0;
 	while (x < mrt->mlx.win_width)
 	{
@@ -292,8 +182,9 @@ void	draw_frame(t_mrt *mrt)
 		while (y < mrt->mlx.win_height)
 		{
 			ray_dir = get_ray_direction(mrt, x, y);
-			color = trace_ray(mrt, (t_ray){mrt->scene.camera.origin, ray_dir},
-					1.0, __DBL_MAX__, reflect_rec_depth);
+			color = trace_ray(mrt, (t_ray){mrt->scene.camera.origin, ray_dir,
+					1.0, __DBL_MAX__},
+					reflect_rec_depth);
 			put_pixel_on_img(mrt, x, y, color);
 			y++;
 		}

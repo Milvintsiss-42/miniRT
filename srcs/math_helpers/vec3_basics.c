@@ -6,16 +6,22 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:23:46 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/19 01:25:47 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/27 17:58:07 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math_helpers.h"
 
+// Compute the square of the magnitude of a vector.
+double	vec3_pow2(t_vec3 vec)
+{
+	return (vec3_dot_prdct(vec, vec));
+}
+
 // Compute the magnitude of a vector.
 double	vec3_magnitude(t_vec3 vec)
 {
-	return (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
+	return (sqrt(vec3_pow2(vec)));
 }
 
 // Compute the sum of [vec1] and [vec2].

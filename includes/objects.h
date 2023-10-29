@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/25 12:03:11 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 15:43:42 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct s_cylinder
 	t_vec3	color;
 	int		specular;
 	double	reflect;
+	t_vec3	p_top_origin;
+	double	p_pow2_radius;
 }	t_cylinder;
 
 typedef struct s_mrt	t_mrt;

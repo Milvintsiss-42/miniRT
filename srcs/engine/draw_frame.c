@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 22:29:31 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:24:59 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,6 @@ t_vec3	canvas_to_viewport(t_mrt *mrt, int x, int y)
 	vp.y = y * mrt->scene.viewport.h / mrt->mlx.win_height;
 	vp.z = mrt->scene.viewport.dist;
 	return (vp);
-}
-
-/// @brief Computes the reflection of a ray on a surface.
-/// This use the following equation:
-/// 2 * normal * (normal . ray) - ray
-/// @param ray The ray to reflect.
-/// @param normal The normal of the surface.
-t_vec3	reflect_ray(t_vec3 ray, t_vec3 normal)
-{
-	return (vec3_diff(
-			vec3_scal_prdct(
-				vec3_scal_prdct(normal, 2.0),
-				vec3_dot_prdct(normal, ray)),
-			ray));
 }
 
 // See the function compute_lighting for more informations about the variables
@@ -111,18 +97,6 @@ int	trace_ray(t_mrt *mrt, t_ray ray, int reflect_rec_depth)
 	return (blend_colors(point.color, reflected_color, 1 - reflection));
 }
 
-t_vec3	get_ray_direction(t_mrt *mrt, int x, int y)
-{
-	t_vec3	base_direction;
-
-	base_direction = canvas_to_viewport(mrt, x, y);
-	return (rotate_vec3(base_direction,
-			mrt->scene.camera.roll,
-			mrt->scene.camera.yaw,
-			mrt->scene.camera.pitch
-		));
-}
-
 static void	set_viewport_dimensions(t_mrt *mrt)
 {
 	mrt->scene.viewport.w = 1.0;
@@ -161,7 +135,7 @@ void	draw_frame(t_mrt *mrt)
 		y = 0;
 		while (y < mrt->mlx.win_height)
 		{
-			ray_dir = get_ray_direction(mrt, x, y);
+			ray_dir = get_camera_ray_direction(mrt, x, y);
 			color = trace_ray(mrt, (t_ray){mrt->scene.camera.origin, ray_dir,
 					1.0, __DBL_MAX__},
 					reflect_rec_depth);

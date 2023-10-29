@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 10:50:07 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 22:01:05 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:49:02 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_l_obj	*toggle_select_object_at_screen_coord(t_mrt *mrt, int x, int y)
 	t_intersect	intersect;
 
 	ray.origin = mrt->scene.camera.origin;
-	ray.dir = get_ray_direction(mrt, x, y);
+	ray.dir = get_camera_ray_direction(mrt, x, y);
 	ray.t_min = 1.0;
 	ray.t_max = __DBL_MAX__;
 	intersect = closest_intersection(mrt, ray);

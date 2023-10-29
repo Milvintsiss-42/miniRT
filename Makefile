@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/10/29 22:39:34 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/10/29 22:47:57 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS		= $(addsuffix .c, \
 			cylinder_normal \
 			object_normal \
 			precompute_basics \
+			ray_helpers \
 		) \
 		$(addprefix intersections/, \
 			intersections_cylinder_register \

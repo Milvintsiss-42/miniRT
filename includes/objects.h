@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 15:43:42 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:25:24 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_sphere
 	t_vec3	color;
 	int		specular;
 	double	reflect;
+	double	p_pow2_radius;
 }	t_sphere;
 
 typedef struct s_plane

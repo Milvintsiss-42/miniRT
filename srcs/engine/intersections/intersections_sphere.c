@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 22:13:55 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 21:55:09 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:25:46 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ t_quadratic	ray_sphere_intersections(t_ray ray, t_sphere sphere)
 	co = vec3_diff(ray.origin, sphere.origin);
 	s.a = vec3_dot_prdct(ray.dir, ray.dir);
 	s.b = 2 * vec3_dot_prdct(co, ray.dir);
-	s.c = vec3_dot_prdct(co, co)
-		- (sphere.diameter / 2) * (sphere.diameter / 2);
+	s.c = vec3_dot_prdct(co, co) - sphere.p_pow2_radius;
 	solve_quadratic(&s);
 	return (s);
 }

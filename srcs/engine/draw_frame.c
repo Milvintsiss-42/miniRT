@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 21:58:40 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:29:31 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,26 +140,6 @@ static void	set_viewport_dimensions(t_mrt *mrt)
 			= mrt->scene.viewport.h * mrt->mlx.win_height / mrt->mlx.win_width;
 		mrt->scene.viewport.dist = (mrt->scene.viewport.h / 2.0)
 			/ tan(deg_to_rad(mrt->scene.camera.fov / 2.0));
-	}
-}
-
-void	precompute_cylinder_basics(t_cylinder *cylinder)
-{
-	cylinder->p_top_origin = vec3_sum(cylinder->origin,
-			vec3_scal_prdct(cylinder->orientation, cylinder->height));
-	cylinder->p_pow2_radius = pow(cylinder->diameter / 2, 2);
-}
-
-void	precompute_basics(t_mrt	*mrt)
-{
-	t_l_obj	*obj_iter;
-
-	obj_iter = mrt->scene.objects;
-	while (obj_iter)
-	{
-		if (obj_iter->type == CYLINDER)
-			precompute_cylinder_basics(obj_iter->object);
-		obj_iter = obj_iter->next;
 	}
 }
 

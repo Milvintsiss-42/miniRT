@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 21:57:27 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:33:35 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,26 @@ int			blend_colors(int color1, int color2, double ratio);
 
 t_sphere	sphere_from_light(t_light light);
 
-// Intersections
-t_intersect	closest_intersection(t_mrt *mrt, t_ray ray);
+// ---engine_helpers---
+void		precompute_basics(t_mrt	*mrt);
+// objects normals
+t_vec3		get_object_normal_at_point(t_vec3 point, t_ray ray,
+				t_intersect intersect);
+t_vec3		get_sphere_normal_at_point(t_vec3 point, t_sphere sphere);
+t_vec3		get_plane_normal_at_point(t_ray ray, t_plane plane);
+t_vec3		get_cylinder_normal_at_point(t_vec3 point, t_cylinder cyl);
 
+// ---intersections---
+t_intersect	closest_intersection(t_mrt *mrt, t_ray ray);
+// sphere
 void		closest_intersection_sphere(t_mrt *mrt, t_intersect *intersection,
 				t_ray ray, t_l_obj *cur_sphere);
 t_quadratic	ray_sphere_intersections(t_ray ray, t_sphere sphere);
-
+// plane
 void		closest_intersection_plane(t_intersect *intersection,
 				t_ray ray, t_l_obj *cur_plane);
 double		ray_plane_intersection(t_ray ray, t_plane plane);
-
+// cylinder
 void		closest_intersection_cylinder(t_mrt *mrt, t_intersect *intersection,
 				t_ray ray, t_l_obj *cur_cylinder);
 double		ray_disk_intersection(t_ray ray, t_vec3 origin, t_vec3 orientation,
@@ -109,12 +118,5 @@ void		register_cylinder_tube_intersection(t_mrt *mrt,
 				t_quadratic solv_q);
 void		register_cylinder_disk_intersection(t_intersect *intersection,
 				t_l_obj *cur_cylinder, t_ray ray, t_tdisk tdisk);
-
-// Objects normals
-t_vec3		get_object_normal_at_point(t_vec3 point, t_ray ray,
-				t_intersect intersect);
-t_vec3		get_sphere_normal_at_point(t_vec3 point, t_sphere sphere);
-t_vec3		get_plane_normal_at_point(t_ray ray, t_plane plane);
-t_vec3		get_cylinder_normal_at_point(t_vec3 point, t_cylinder cyl);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:29:21 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/21 10:49:23 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:13:14 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ bool	parse_normalized_vector(char *str, t_vec3 *vector_ret)
 	if (vector_ret->x < -1 || vector_ret->x > 1
 		|| vector_ret->y < -1 || vector_ret->y > 1
 		|| vector_ret->z < -1 || vector_ret->z > 1)
+		return (false);
+	if (vector_ret->x == 0 && vector_ret->y == 0 && vector_ret->z == 0)
 		return (false);
 	*vector_ret = vec3_normalize(*vector_ret);
 	return (true);

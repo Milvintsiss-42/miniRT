@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 00:51:45 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:59:55 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,10 @@ typedef struct s_tdisk
 typedef struct s_mrt	t_mrt;
 
 void		draw_frame(t_mrt *mrt);
+
 void		draw_test_card_f(t_mrt *mrt);
 
 void		compute_lighting(t_mrt *mrt, t_point *p);
-
-t_sphere	sphere_from_light(t_light light);
 
 // ---engine_helpers---
 // color_helpers

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:30:33 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 22:25:24 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:00:22 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void		unselect_all_objects(t_mrt *mrt);
 void		apply_modifier_to_selected_objs(t_mrt *mrt,
 				void (*modifier)(t_mrt *mrt, t_l_obj *obj, int direction),
 				int direction);
+t_sphere	sphere_from_light(t_light light);
 
 t_vec3		*get_obj_origin(t_l_obj *obj);
 t_vec3		*get_obj_orientation(t_l_obj *obj);

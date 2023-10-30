@@ -6,29 +6,17 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 00:50:46 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:02:36 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 #include "mlx_helpers.h"
 
-t_sphere	sphere_from_light(t_light light)
-{
-	t_sphere	sphere;
-
-	sphere.origin = light.origin_o_dir;
-	sphere.diameter = 0.5;
-	sphere.color = int_color_to_t_vec3(WHITE);
-	sphere.specular = -1;
-	sphere.reflect = 0.0;
-	precompute_sphere_basics(&sphere);
-	return (sphere);
-}
-
 // See the function compute_lighting for more informations about the variables
 // in the t_point struct.
-t_point	compute_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
+static t_point	compute_point_color(t_mrt *mrt, t_ray ray,
+	t_intersect intersect)
 {
 	t_point	point;
 	t_vec3	color;
@@ -52,7 +40,7 @@ t_point	compute_point_color(t_mrt *mrt, t_ray ray, t_intersect intersect)
 	return (point);
 }
 
-int	trace_ray(t_mrt *mrt, t_ray ray, int reflect_rec_depth)
+static int	trace_ray(t_mrt *mrt, t_ray ray, int reflect_rec_depth)
 {
 	t_intersect	clst_intersect;
 	t_point		point;

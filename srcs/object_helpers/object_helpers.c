@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 10:50:07 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/29 22:49:02 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:58:04 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,17 @@ void	apply_modifier_to_selected_objs(t_mrt *mrt,
 			modifier(mrt, iter_obj, direction);
 		iter_obj = iter_obj->next;
 	}
+}
+
+t_sphere	sphere_from_light(t_light light)
+{
+	t_sphere	sphere;
+
+	sphere.origin = light.origin_o_dir;
+	sphere.diameter = 0.5;
+	sphere.color = int_color_to_t_vec3(WHITE);
+	sphere.specular = -1;
+	sphere.reflect = 0.0;
+	precompute_sphere_basics(&sphere);
+	return (sphere);
 }

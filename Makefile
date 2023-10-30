@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/10/30 00:52:42 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/10/30 01:15:24 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ MLX_FLAGS	= -L$(MLX_DIR) -lmlx_Darwin \
 endif
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -O3
+CFLAGS		= -Wall -Wextra
 LFLAGS		= $(LIBFT_FLAGS) $(MLX_FLAGS)
 ifneq (nWerror, $(filter nWerror,$(MAKECMDGOALS)))
 	CFLAGS	+= -Werror
@@ -112,6 +112,9 @@ ifeq (g3, $(filter g3,$(MAKECMDGOALS)))
 endif
 ifeq (debug, $(filter debug,$(MAKECMDGOALS)))
 	CFLAGS	+= -D KDEBUG=1
+endif
+ifeq (O3, $(filter O3,$(MAKECMDGOALS)))
+	CFLAGS	+= -O3
 endif
 
 RM			= rm -rf
@@ -169,9 +172,9 @@ g3			:
 			@echo "WARN: Compiling with g3 flag!"
 debug		:
 			@echo "WARN: debug is enabled"
-debug_exec	:
-			@echo "WARN: debug_exec is enabled"
+O3			:
+			@echo "WARN: O3 is enabled"
 
 .PHONY: \
  all bonus clean fclean fcleanall re rmlibft rmmlx\
- nWerror sanitize debug g3 debug_exec
+ nWerror sanitize debug g3 O3

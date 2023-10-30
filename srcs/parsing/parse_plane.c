@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:01:42 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 15:36:56 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:18:37 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,12 @@ void	add_plane(t_mrt *mrt, t_parsing *parsing)
 		parsing_error(mrt, *parsing, ERR_INVALID_NORM_VECTOR, true);
 	if (!parse_color(parsing->s_line[3], &plane.color))
 		parsing_error(mrt, *parsing, ERR_INVALID_COLOR, true);
+	plane.specular = -1;
+	plane.reflect = 0;
 	if (IS_BONUS)
 	{
 		parse_specular(mrt, parsing, parsing->s_line[4], &plane.specular);
 		parse_reflection(mrt, parsing, parsing->s_line[5], &plane.reflect);
-	}
-	else
-	{
-		plane.specular = -1;
-		plane.reflect = 0;
 	}
 	add_plane_to_scene_objects(mrt, parsing, plane);
 }

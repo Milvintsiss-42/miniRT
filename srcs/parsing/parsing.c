@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:35:13 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 20:56:17 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:47:10 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static void	parse_line(t_mrt *mrt, t_parsing *parsing)
 {
 	if (ft_strcmp(parsing->line, "\n") == 0)
 		return ;
-	parsing->line[ft_strlen(parsing->line) - 1] = 0;
+	if (parsing->line[ft_strlen(parsing->line) - 1] == '\n')
+		parsing->line[ft_strlen(parsing->line) - 1] = 0;
 	parsing->s_line = ft_split(parsing->line, ' ');
 	if (!parsing->s_line)
 		parsing_error(mrt, *parsing, ERR_UNEXPECTED_ERROR, false);

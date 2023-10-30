@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:43:48 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/28 18:42:24 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:37:01 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void		solve_quadratic(t_quadratic *q);
 
 double		deg_to_rad(double deg);
 double		rad_to_deg(double rad);
-double		vec3_ang_btwn(t_vec3 vec1, t_vec3 vec2);
 
 t_vec3		vec3_sum(t_vec3 vec1, t_vec3 vec2);
 t_vec3		vec3_diff(t_vec3 vec1, t_vec3 vec2);

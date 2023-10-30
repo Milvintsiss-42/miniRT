@@ -6,25 +6,33 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:23:46 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/27 17:58:07 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:40:11 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math_helpers.h"
 
-// Compute the square of the magnitude of a vector.
+/// @brief Computes the square of the magnitude of a vector as
+// `r = vector · vector` or `r = (vector)²`.
+/// @param vec
+/// @return
 double	vec3_pow2(t_vec3 vec)
 {
 	return (vec3_dot_prdct(vec, vec));
 }
 
-// Compute the magnitude of a vector.
+/// @brief Computes the magnitude (length) of a vector as `r = |vec|`.
+/// @param vec
+/// @return
 double	vec3_magnitude(t_vec3 vec)
 {
 	return (sqrt(vec3_pow2(vec)));
 }
 
-// Compute the sum of [vec1] and [vec2].
+/// @brief Computes the sum of [vec1] and [vec2] as `r = vec1 + vec2`.
+/// @param vec1
+/// @param vec2
+/// @return
 t_vec3	vec3_sum(t_vec3 vec1, t_vec3 vec2)
 {
 	t_vec3	ret;
@@ -35,7 +43,11 @@ t_vec3	vec3_sum(t_vec3 vec1, t_vec3 vec2)
 	return (ret);
 }
 
-// Compute the difference between [vec1] and [vec2] as r = vec1 - vec2.
+/// @brief Computes the difference between [vec1] and [vec2] as
+/// `r = vec1 - vec2`.
+/// @param vec1
+/// @param vec2
+/// @return
 t_vec3	vec3_diff(t_vec3 vec1, t_vec3 vec2)
 {
 	t_vec3	ret;
@@ -46,7 +58,10 @@ t_vec3	vec3_diff(t_vec3 vec1, t_vec3 vec2)
 	return (ret);
 }
 
-// Compute a normalized vector of [vec].
+/// @brief Computes a normalized vector of [vec] as `r = vec / |vec|`.
+/// A normalized vector is a vector with a magnitude of 1.
+/// @param vec
+/// @return
 t_vec3	vec3_normalize(t_vec3 vec)
 {
 	t_vec3	ret;

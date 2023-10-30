@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:01:42 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/09 07:48:07 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:37:14 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	add_cylinder(t_mrt *mrt, t_parsing *parsing)
 {
 	t_cylinder	cylinder;
 
-	if (ft_splitlen(parsing->s_line) != 8)
+	if (ft_splitlen(parsing->s_line) != (6 + 2 * IS_BONUS))
 		parsing_error(mrt, *parsing, ERR_INVALID_NUMBER_OF_ARGUMENTS, true);
 	if (!parse_vector(parsing->s_line[1], &cylinder.origin))
 		parsing_error(mrt, *parsing, ERR_INVALID_VECTOR, true);
@@ -44,13 +44,15 @@ void	add_cylinder(t_mrt *mrt, t_parsing *parsing)
 		parsing_error(mrt, *parsing, ERR_INVALID_FLOATING_POINT, true);
 	if (!parse_color(parsing->s_line[5], &cylinder.color))
 		parsing_error(mrt, *parsing, ERR_INVALID_COLOR, true);
-	if (!parse_int(parsing->s_line[6], &cylinder.specular))
-		parsing_error(mrt, *parsing, ERR_INVALID_INT, true);
-	if (cylinder.specular < -1)
-		parsing_error(mrt, *parsing, ERR_OUT_OF_RANGE, true);
-	if (!parse_double(parsing->s_line[7], &cylinder.reflect))
-		parsing_error(mrt, *parsing, ERR_INVALID_FLOATING_POINT, true);
-	if (cylinder.reflect < 0.0 || cylinder.reflect > 1.0)
-		parsing_error(mrt, *parsing, ERR_OUT_OF_RANGE, true);
+	if (IS_BONUS)
+	{
+		parse_specular(mrt, parsing, parsing->s_line[6], &cylinder.specular);
+		parse_reflection(mrt, parsing, parsing->s_line[7], &cylinder.reflect);
+	}
+	else
+	{
+		cylinder.specular = -1;
+		cylinder.reflect = 0;
+	}
 	add_cylinder_to_scene_objects(mrt, parsing, cylinder);
 }

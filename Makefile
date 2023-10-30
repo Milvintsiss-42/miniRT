@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/10/30 01:15:24 by ple-stra         ###   ########.fr        #
+#    Updated: 2023/10/30 15:07:52 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS		= $(addsuffix .c, \
 		parsing_helpers \
 		parsing_helpers_color \
 		parsing_helpers_vectors \
+		parse_bonus_args \
 		parse_light \
 		parse_camera \
 		parse_sphere \
@@ -101,6 +102,11 @@ endif
 CC			= cc
 CFLAGS		= -Wall -Wextra
 LFLAGS		= $(LIBFT_FLAGS) $(MLX_FLAGS)
+ifneq (bonus, $(filter bonus,$(MAKECMDGOALS)))
+ifneq (rebonus, $(filter rebonus,$(MAKECMDGOALS)))
+	CFLAGS	+= -D IS_BONUS=0
+endif
+endif
 ifneq (nWerror, $(filter nWerror,$(MAKECMDGOALS)))
 	CFLAGS	+= -Werror
 endif
@@ -120,6 +126,8 @@ endif
 RM			= rm -rf
 
 all			: $(NAME)
+
+bonus		: all
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -160,9 +168,9 @@ fcleanall	: rmlibft rmmlx
 			$(RM) $(BUILD_DIR)
 			$(RM) $(NAME)
 
-bonus		: all
-
 re			: fclean all
+
+rebonus		: fclean bonus
 
 nWerror		:
 			@echo "WARN: Compiling without Werror flag!"

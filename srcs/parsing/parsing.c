@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:35:13 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 14:06:23 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:49:27 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ static bool	get_info_from_line(t_mrt *mrt, t_parsing *parsing)
 		set_ambiant_light(mrt, parsing);
 	else if (ft_strcmp(parsing->s_line[0], "C") == 0)
 		set_camera(mrt, parsing);
-	else if (ft_strcmp(parsing->s_line[0], "sl") == 0)
+	else if ((IS_BONUS && ft_strcmp(parsing->s_line[0], "sl") == 0)
+		|| (!IS_BONUS && ft_strcmp(parsing->s_line[0], "L") == 0))
 		add_light(mrt, parsing, false);
-	else if (ft_strcmp(parsing->s_line[0], "dl") == 0)
+	else if (IS_BONUS && ft_strcmp(parsing->s_line[0], "dl") == 0)
 		add_light(mrt, parsing, true);
 	else if (ft_strcmp(parsing->s_line[0], "sp") == 0)
 		add_sphere(mrt, parsing);

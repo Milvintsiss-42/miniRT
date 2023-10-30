@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:05:09 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/22 11:21:31 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:25:19 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 
 # ifndef KDEBUG
 #  define KDEBUG 0
+# endif
+# ifndef IS_BONUS
+#  define IS_BONUS 1
 # endif
 
 # define ERR_UNKNOWN			"Unknown error"

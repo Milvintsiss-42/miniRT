@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:51:48 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 15:28:34 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:56:42 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	set_ambiant_light(t_mrt *mrt, t_parsing *parsing)
 		parsing_error(mrt, *parsing, ERR_OUT_OF_RANGE, true);
 	if (!parse_color(parsing->s_line[2], &amb_light->color))
 		parsing_error(mrt, *parsing, ERR_INVALID_COLOR, true);
+	if (!IS_BONUS)
+		amb_light->color = (t_vec3){255, 255, 255};
 }
 
 static void	add_light_to_scene_lights(t_mrt *mrt, t_parsing *parsing,
@@ -54,6 +56,8 @@ void	add_light(t_mrt *mrt, t_parsing *parsing, bool is_directional)
 {
 	t_light	light;
 
+	if (!IS_BONUS && mrt->scene.lights != 0)
+		parsing_error(mrt, *parsing, ERR_MULTIPLE_LIGHTS, true);
 	if (ft_splitlen(parsing->s_line) != 4)
 		parsing_error(mrt, *parsing, ERR_INVALID_NUMBER_OF_ARGUMENTS, true);
 	if (is_directional)
@@ -72,5 +76,7 @@ void	add_light(t_mrt *mrt, t_parsing *parsing, bool is_directional)
 		parsing_error(mrt, *parsing, ERR_OUT_OF_RANGE, true);
 	if (!parse_color(parsing->s_line[3], &light.color))
 		parsing_error(mrt, *parsing, ERR_INVALID_COLOR, true);
+	if (!IS_BONUS)
+		light.color = (t_vec3){255, 255, 255};
 	add_light_to_scene_lights(mrt, parsing, light, is_directional);
 }

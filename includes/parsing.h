@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:29:32 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/06/15 16:24:46 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:06:41 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
  camera"
 # define ERR_MULTIPLE_AMBIANT "You cannot have multiple ambiant lights"
 # define ERR_MULTIPLE_CAMERA "You cannot have multiple cameras"
+# define ERR_MULTIPLE_LIGHTS "You cannot have multiple lights"
 # define ERR_UNEXPECTED_ERROR "Unexpected error"
 # define ERR_UNKNOWN_ELEMENT "Unknown element"
 # define ERR_INVALID_NUMBER_OF_ARGUMENTS "Invalid number of arguments"
@@ -58,5 +59,10 @@ bool		is_double(char *str);
 bool		parse_double(char *str, double *double_ret);
 bool		parse_vector(char *str, t_vec3 *vector_ret);
 bool		parse_normalized_vector(char *str, t_vec3 *vector_ret);
+
+void		parse_specular(t_mrt *mrt, t_parsing *parsing, char *str,
+				int *specular_ret);
+void		parse_reflection(t_mrt *mrt, t_parsing *parsing, char *str,
+				double *reflection_ret);
 
 #endif

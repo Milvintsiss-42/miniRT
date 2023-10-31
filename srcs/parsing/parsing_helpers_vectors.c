@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:29:21 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 15:13:14 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:57:19 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ bool	parse_vector(char *str, t_vec3 *vector_ret)
 {
 	char	**s_str;
 
+	if (!are_commas_placed_correctly(str))
+		return (false);
 	s_str = ft_split(str, ',');
 	if (!s_str)
 		return (false);

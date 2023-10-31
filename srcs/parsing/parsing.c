@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:35:13 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 21:47:10 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/31 01:09:40 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	parsing_error(t_mrt *mrt, t_parsing parsing, char *error,
 
 static bool	get_info_from_line(t_mrt *mrt, t_parsing *parsing)
 {
+	if (!parsing->s_line[0])
+		return (false);
 	if (ft_strcmp(parsing->s_line[0], "A") == 0)
 		set_ambiant_light(mrt, parsing);
 	else if (ft_strcmp(parsing->s_line[0], "C") == 0)

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:13:23 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/23 17:41:03 by ple-stra         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:48:00 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ bool	parse_int(char *str, int *int_ret)
 	if (!is_int(str))
 		return (false);
 	*int_ret = ft_atoi(str);
+	if ((*int_ret > 0 && *str == '-') || (*int_ret < 0 && *str != '-'))
+		return (false);
 	return (true);
 }
 

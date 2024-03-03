@@ -1,0 +1,20 @@
+# Values used in subject example
+# Camera orientation as been corrected to be a valid orientation vector.
+
+# Ambiant light
+A 0.2 255,255,255
+
+# Camera
+C 20,5,-50 0,0,1.0 70
+
+# Light
+L -40,20,30 0.7 255,255,255
+
+# Plane
+pl 0,0,0 0,1.0,0 255,0,225
+
+# Sphere
+sp 0,0,20 20 255,0,0
+
+# Cylinder
+cy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255

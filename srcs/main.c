@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:58:25 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/27 16:34:14 by ple-stra         ###   ########.fr       */
+/*   Updated: 2024/03/03 22:23:16 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ int	main(int argc, char const **argv)
 	init_mrt_data(&mrt, argc, argv);
 	verify_args(mrt, argc, argv);
 	parse_scene(&mrt, argv[1]);
-	open_window(&mrt, 0.5, 0.5);
+	open_window(&mrt, 0.25, 0.5);
 	return (0);
 }

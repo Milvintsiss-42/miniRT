@@ -31,13 +31,13 @@ https://github.com/Milvintsiss-42/miniRT/assets/38794405/a291a17e-f3b4-49ca-a0ef
 You need a minimal dev environnement (`gcc`, `make`, etc).
 
 If you're on MacOS you also probably need to install `Xquartz`:
-```console
+```
 brew install Xquartz
 reboot
 ```
 
 ### Building and execution:
-```console
+```
 git clone https://github.com/Milvintsiss-42/miniRT.git
 cd miniRT
 make bonus

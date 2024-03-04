@@ -6,7 +6,7 @@
 #    By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/29 15:36:23 by ple-stra          #+#    #+#              #
-#    Updated: 2023/10/30 15:07:52 by ple-stra         ###   ########.fr        #
+#    Updated: 2024/03/04 15:04:18 by ple-stra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,6 +123,8 @@ ifeq (O3, $(filter O3,$(MAKECMDGOALS)))
 	CFLAGS	+= -O3
 endif
 
+GIT_SUBM	= $(shell \
+ sed -nE 's/path = +(.+)/\1\/.git/ p' .gitmodules | paste -s -)
 RM			= rm -rf
 
 all			: $(NAME)
@@ -132,6 +134,10 @@ bonus		: all
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+$(GIT_SUBM): %/.git: .gitmodules
+	@git submodule init
+	@git submodule update $*
 
 $(LIBFT)	:
 ifeq (,$(wildcard $(LIBFT)))
@@ -153,7 +159,7 @@ rmmlx		:
 			@echo "deleting mlx build..."
 			@$(MAKE) -sC $(MLX_DIR) clean
 
-$(NAME)		: $(LIBFT) $(MLX) $(OBJ)
+$(NAME)		: $(GIT_SUBM) $(LIBFT) $(MLX) $(OBJ)
 			$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJ) $(LFLAGS)
 			
 clean		:

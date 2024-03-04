@@ -1,0 +1,10 @@
+[submodule "minilibx-linux"]
+	path = minilibx-linux
+	url = git@github.com:42Paris/minilibx-linux.git
+[submodule "minilibx"]
+	path = minilibx
+	url = git@github.com:42Paris/minilibx-linux.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/Milvintsiss-42/libft
+	branch = v1.2.0

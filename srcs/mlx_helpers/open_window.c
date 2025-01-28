@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:25:57 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 00:16:40 by ple-stra         ###   ########.fr       */
+/*   Updated: 2025/01/28 01:45:00 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int	reframe(t_mrt *mrt)
 {
+	if (mrt->img.fade_resolution < 1)
+		return (0);
 	create_new_img(mrt);
 	draw_frame(mrt);
 	set_new_img_to_screen(mrt);

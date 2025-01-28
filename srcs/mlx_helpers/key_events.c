@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 15:18:27 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/27 16:31:31 by ple-stra         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:20:59 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	on_keypressed(int key, t_mrt *mrt)
 {
 	if (KDEBUG)
 		ft_printf("Pressed key: %#x\n", key);
+	mrt->img.fade_resolution = FADE_MIN_RES;
 	if (key_echap(mrt, key)
 		|| key_mode(mrt, key)
 		|| key_axis(mrt, key)

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 02:35:34 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/25 12:03:29 by ple-stra         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:20:59 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	on_mouse_event(int button, int x, int y, t_mrt *mrt)
 {
 	if (KDEBUG)
 		ft_printf("Mouse click: %d at %d, %d\n", button, x, y);
+	mrt->img.fade_resolution = FADE_MIN_RES;
 	if (button == MOUSE_LEFT)
 		toggle_select_object_at_screen_coord(mrt, x, y);
 	else if (button == MOUSE_SCROLL_UP || button == MOUSE_SCROLL_DOWN)

@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:41 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 01:02:36 by ple-stra         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:48:11 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,48 @@ static int	trace_ray(t_mrt *mrt, t_ray ray, int reflect_rec_depth)
 	return (blend_colors(point.color, reflected_color, 1 - reflection));
 }
 
+static int	try_fade_pixel(t_mrt *mrt, int x, int y)
+{
+	int	fade_res;
+	int	ref_x;
+	int	ref_y;
+
+	fade_res = mrt->img.fade_resolution;
+	if (x % fade_res != 0 || y % fade_res != 0)
+	{
+		ref_x = x - (x % fade_res);
+		ref_y = y - (y % fade_res);
+		return (get_color_of_pixel_on_img(mrt, mrt->img.future, ref_x, ref_y));
+	}
+	if (fade_res < FADE_MIN_RES && x % (fade_res + 1) == 0
+		&& y % (fade_res + 1) == 0)
+		return (get_color_of_pixel_on_img(mrt, mrt->img.current, x, y));
+	return (-1);
+}
+
+static int	compute_color_of_pixel(t_mrt *mrt, int x, int y,
+	int reflect_rec_depth)
+{
+	int	faded_pixel;
+
+	if (FADE_MIN_RES > 1)
+	{
+		faded_pixel = try_fade_pixel(mrt, x, y);
+		if (faded_pixel >= 0)
+			return (faded_pixel);
+	}
+	return (trace_ray(mrt,
+			(t_ray){mrt->scene.camera.origin,
+			get_camera_ray_direction(mrt, x, y),
+			1.0, __DBL_MAX__},
+		reflect_rec_depth));
+}
+
 void	draw_frame(t_mrt *mrt)
 {
 	int		x;
 	int		y;
-	t_vec3	ray_dir;
-	int		color;
+	int		pixel_color;
 	int		reflect_rec_depth;
 
 	reflect_rec_depth = REFLECT_REC_DEPTH
@@ -87,13 +123,11 @@ void	draw_frame(t_mrt *mrt)
 		y = 0;
 		while (y < mrt->mlx.win_height)
 		{
-			ray_dir = get_camera_ray_direction(mrt, x, y);
-			color = trace_ray(mrt, (t_ray){mrt->scene.camera.origin, ray_dir,
-					1.0, __DBL_MAX__},
-					reflect_rec_depth);
-			put_pixel_on_img(mrt, x, y, color);
+			pixel_color = compute_color_of_pixel(mrt, x, y, reflect_rec_depth);
+			put_pixel_on_img(mrt, x, y, pixel_color);
 			y++;
 		}
 		x++;
 	}
+	mrt->img.fade_resolution--;
 }

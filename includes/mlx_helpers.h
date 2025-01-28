@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:47:46 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 16:23:38 by ple-stra         ###   ########.fr       */
+/*   Updated: 2025/01/28 01:26:42 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,10 @@ typedef struct s_mlx {
 }	t_mlx;
 
 typedef struct s_mrt		t_mrt;
+typedef struct s_img		t_img;
 
 void		put_pixel_on_img(t_mrt *mrt, int x, int y, int color);
+int			get_color_of_pixel_on_img(t_mrt *mrt, t_img img, int x, int y);
 
 int			reframe(t_mrt *mrt);
 void		open_window(t_mrt *mrt, double width_fraction,

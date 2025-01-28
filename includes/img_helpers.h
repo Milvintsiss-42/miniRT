@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:19:59 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/03/18 18:14:22 by ple-stra         ###   ########.fr       */
+/*   Updated: 2025/01/28 01:14:20 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_mlx	t_mlx;
 typedef struct s_img_garbage {
 	t_img	current;
 	t_img	future;
+	int		fade_resolution;
 }	t_img_garbage;
 
 void		create_new_img(t_mrt *mrt);

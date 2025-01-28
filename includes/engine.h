@@ -6,7 +6,7 @@
 /*   By: ple-stra <ple-stra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:59:49 by ple-stra          #+#    #+#             */
-/*   Updated: 2023/10/30 00:59:55 by ple-stra         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:43:57 by ple-stra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "common.h"
 # include "objects.h"
+
+# define FADE_MIN_RES		12
 
 # define REFLECT_REC_DEPTH	3
 
